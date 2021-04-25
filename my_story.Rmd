@@ -2,9 +2,11 @@
 title: "My Story"
 ---
 
-The passage on Columbia Engineering's website summarizes my story quite neatly, so I'm just going to put that here with a few edits here and there.
+*The passage on Columbia Engineering's website summarizes my story quite neatly, so I'm just going to put that here with a few edits here and there.*
 
-From the outskirts of Tokyo, Edward Li has been fascinated by the idea of intelligent lifeforms since he was six years old. Inspired by the limitless potential of computers, Edward’s aspirations now lie in the fields of Artificial Intelligence and Neuroscience in hopes of contributing to the creation of Artificial General Intelligence (AGI).
+**From the outskirts of Tokyo, Edward Li has been fascinated by the idea of intelligent lifeforms since he was six years old. Inspired by the limitless potential of computers, Edward’s aspirations now lie in the fields of Artificial Intelligence and Neuroscience in hopes of contributing to the creation of Artificial General Intelligence (AGI).**
+
+
 While most phenomena in our world can be explained by the natural sciences such as physics and chemistry, there still exist questions that we have no clear answer to. Out of the countless unanswered enigmas, one would captivate the entirety of Edward’s childhood: What is the cause of sentience and intelligence? Edward’s passion for science bloomed when he was six years old; inspired by the idea of extraterrestrial life beyond our atmosphere, Edward would often observe the stars with his homemade telescope every night. His obsession for astronomy would carry on until 8th grade when he watched “Avengers: Age of Ultron,” a science fiction movie centered around an AI created by the superhero Iron Man with the power of technology. Intrigued by the idea of creating sentient beings with 0s and 1s, Edward began his journey into Computer Science, Robotics, and Neuroscience in hopes of achieving similar feats.
 
 After teaching himself computer programming, machine learning and neuroscience with college textbooks and online resources such as Andrew Ng's Machine Learning course, Edward would focus a large portion of his time towards devising an idea for chatbots—a type of AI that could simulate human-like conversations. The “Eureka” moment would come to pass two years after his journey began; however, he didn’t possess the required tools and knowledge to realize his idea. Thus, Edward contacted university professors in hopes of finding a mentor for his research, and he was lucky enough to have one hold an interest in his idea.
