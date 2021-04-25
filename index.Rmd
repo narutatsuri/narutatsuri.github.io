@@ -17,10 +17,11 @@ While I was in Columbia's Formula Racing Club (FSAE), I was working on tire simu
 In my free time, I like to program–mainly simulations that I find interesting to see what would happen and reinforcement learning agents to train on the games I make. I also like making robots and tinkering.
 
 If you're interested, here are a few miscellaneous links (most are in Japanese) where I appear:
-The Egleston Scholars: Weida (Edward) Li
-江添記念財団学術部門第四十九期生：李 為達
-Containerインタビュー：李 為達
-現役高校生チーム、アメリカのロボット大会に臨む！
+ - [The Egleston Scholars: Weida (Edward) Li] (https://www.engineering.columbia.edu/egleston-scholars/weida-edward-li)
+ - [江副記念財団学術部門第四十九期生：李 為達](https://www.recruit-foundation.org/academic/li/)
+ - [Containerインタビュー：李 為達](https://container-web.jp/people/15564.html)
+ - [現役高校生チーム、アメリカのロボット大会に臨む！](https://newswitch.jp/p/10882)
 
-Email: wl2787@columbia.edu
-GitHub: IronEdward
+Feel free to reach out to me for anything!
+ - Email: [wl2787@columbia.edu](mailto:wl2787@columbia.edu)
+ - GitHub: [IronEdward](https://github.com/IronEdward)
