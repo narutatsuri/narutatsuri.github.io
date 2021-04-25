@@ -1,9 +1,12 @@
-name: "personal-website"
+name: "edwards-website"
 output_dir: "."
 navbar:
-  title: "Personal Website"
+  title: "Edward's Website"
   left:
-    - text: "Home"
+    - text: "About"
       href: index.html
-    - text: "About Me"
-      href: about.html
+    - text: "My Story"
+      href: my_story.html
+output:
+  html_document:
+    theme: flatly
