@@ -1,0 +1,14 @@
+name: "edwards-website"
+output_dir: "."
+navbar:
+  title: "Edward's Website"
+  left:
+    - text: "About"
+      href: index.html
+    - text: "My Story"
+      href: my_story.html
+    - text: "Projects"
+      href: projects.html
+output:
+  html_document:
+    theme: flatly
