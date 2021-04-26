@@ -4,3 +4,11 @@ title: "Projects"
 
 Here's a list of projects I've worked on in the past.
 
+***
+### [RL-basketball](project_blogs/RL-basketball.Rmd)
+Reinforcement learning agent learns to shoot three-pointers.
+
+***
+### [RL-blockavoidinggame](project_blogs/RL-blockavoidinggame.Rmd)
+DQN on a simple block avoiding game.
+
