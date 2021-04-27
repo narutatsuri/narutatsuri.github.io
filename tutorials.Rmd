@@ -1,0 +1,7 @@
+---
+title: "tutorials"
+output: html_document
+---
+
+I'm currently working on creating documents which go into the theoretical side (e.g. proofs) of architectures/algorithms/etc. that come up frequently in fields related to machine learning. 
+Stay tuned!

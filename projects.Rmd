@@ -16,6 +16,7 @@ DQN on a simple block avoiding game.
 ***
 ### [RL-multiplayershootinggame]()
 
+***
 ## Projects in Python
 
 ### [Python-bruh.io]()

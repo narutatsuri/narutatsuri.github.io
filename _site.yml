@@ -9,6 +9,8 @@ navbar:
       href: my_story.html
     - text: "Projects"
       href: projects.html
+    - text: "Tutorials"
+      href: tutorials.html
 output:
   html_document:
     theme: flatly
