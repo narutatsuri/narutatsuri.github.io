@@ -6,9 +6,9 @@ title: "About"
 
 Hi there! I’m Edward, an undergrad in the class of 2024 and an Egleston Scholar at Columbia Engineering.
 
-As of now, my main interests lie amidst the fields of Machine Learning and Computational Neuroscience. My ultimate lifetime goal is to contribute to the ongoing pursuit of comprehending what exactly governs consciousness and sentience, which will hopefully happen someday (and also *hopefully* not create something along the lines of Ultron or Skynet).
+As of now, my main interests lie amidst the fields of Machine Learning and Computational Neuroscience. My ultimate lifetime goal is to contribute to the ongoing pursuit of comprehending what exactly governs consciousness and sentience, which will *hopefully* happen some day (and also *hopefully* not create something along the lines of Ultron or Skynet).
 
-Currently, I'm working with Dr. Nakul Verma on two research projects.
+Currently, most of my time is going into two research projects (technically, one research and the other a project) with with Dr. Nakul Verma at Columbia's Computer Science department.
 
 One is on unsupervised sentiment analysis with articles written by people, and the motivation behind the project is to explore new ways and algorithms for unsupervised learning. The main focus is to start with a baseline model and use a form of bootstrapping to improve accuracy. We're also looking into PU Learning methods and seeing if combining NLP and PU Learning works. 
 
