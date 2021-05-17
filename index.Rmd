@@ -8,15 +8,19 @@ Hi there! I’m Edward, an undergrad in the class of 2024 and an Egleston Schola
 
 My main interests lie amidst the fields of Machine Learning, Natural Language Processing, and Computational Neuroscience, and my lifetime goal is to contribute to the ongoing pursuit of comprehending what exactly governs consciousness and sentience.
 
-Currently, I'm working with Professor Nakul Verma and leading a research project on unsupervised sentiment analysis with finance-related articles. The motivation behind the project is, to a) develop a robust model for classifying whether articles talk about a certain company positively or negatively, and b) to develop a method that correctly classifies unlabeled finance-related news articles.
+Currently, I'm working with Dr. Nakul Verma on two research projects.
 
-I'm also collaborating with a friend who goes to Cambridge University on a Computer Vision-related project. The general idea is to develop a miniature system that can accurately calculate object distance by focusing on the "blurriness" of the picture (the Laplacian Values) that uses deep learning.
+One is on unsupervised sentiment analysis with articles written by people, and the motivation behind the project is to explore new ways and algorithms for unsupervised learning. The main focus is to start with a baseline model and use a form of bootstrapping to improve accuracy. We're also looking into PU Learning methods and seeing if combining NLP and PU Learning works. 
 
-Besides research, I'm also in Columbia's space development club, also known as Columbia Space Initiative (CSI). I'm in the RASC-AL team that looks to participate in RASC-AL, a student competition to design deep space mission concepts. Specifically, I'm in charge of designing and researching about the propulsion systems.
+The second one is focused on theoretical machine learning, specifically representation learning and word embeddings. An interesting phenomenon that occurs in the skip-gram model (model for learning vector representations of words) is that they express *additive compositionality*, which means that although we don't specifically train the skip-gram model to learn the relationships between words of, say, "man + royal = king," the model surprisingly possesses that characteristic. While there has been a lot of work on proving how this can be, the described proofs have unrealistic and strict assumptions and there still isn't a good explanation as to what is going on (AFAIK). We look to investigate this phenomenon and hopefully add to the preceding work on explaining what exactly is happening.
 
-While I was in Columbia's Formula Racing Club (FSAE), I was working on tire simulation; specifically, applying curve-fitting and coefficient optimization of Pacejka's Magic Formula.
+I'm also collaborating with a friend who goes to Cambridge University on a Computer Vision-related project. The general idea is to develop a miniature system that can accurately calculate object distance.
 
-In my free time, I like to program–mainly simulations that I find interesting to see what would happen and reinforcement learning agents to train on the games I make. I also like making robots and tinkering.
+Besides research, I'm also in Columbia Space Initiative (CSI), Columbia's space-themed club. I'm in the RASC-AL team that looks to participate in RASC-AL, a student competition to design deep space mission concepts. Specifically, I'm in charge of designing the propulsion systems (more or less just reading past papers on the topic and coming up with new designs based on previously successful missions).
+
+While I was in Columbia's Formula Racing Club (FSAE), I was working on tire simulation; specifically, applying curve-fitting and coefficient optimization on Pacejka's Magic Formula.
+
+In my free time, I like to program—mainly simulations that I find interesting to see what would happen and reinforcement learning agents to train on the games I make. I also like making robots and tinkering (and Columbia has the perfect space for that—the Makerspace).
 
 If you're interested, here are a few miscellaneous links (most are in Japanese) where I appear:
 
@@ -28,4 +32,4 @@ If you're interested, here are a few miscellaneous links (most are in Japanese) 
 Feel free to reach out to me for anything!
 
 - Email: [wl2787@columbia.edu](mailto:wl2787@columbia.edu)
-- GitHub: [IronEdward](https://github.com/IronEdward)
+- GitHub: [NarutatsuRi](https://github.com/narutatsuri)
