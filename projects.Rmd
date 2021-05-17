@@ -2,7 +2,9 @@
 title: "Projects"
 ---
 
-Here's a list of projects I've worked on in the past.
+Here's a list of projects I've worked on in the past. 
+
+*(Sorry, I still haven't made any posts describing exactly how they work)*
 
 ## Projects related to Reinforcement Learning
 
