@@ -6,11 +6,12 @@ title: "About"
 
 Hi there! I’m Edward, an undergrad in the class of 2024 and an Egleston Scholar at Columbia Engineering.
 
-As of now, my main interests lie amidst the fields of Machine Learning and Computational Neuroscience. My lifetime goal is to contribute to the ongoing pursuit of comprehending what exactly governs consciousness and sentience, which will *hopefully* happen some day (and also *hopefully* not create something along the lines of Ultron or Skynet).
+As of now, my main interests lie amidst the fields of Machine Learning and Mathematics. My lifetime goal is to contribute to the ongoing pursuit of comprehending what exactly governs consciousness and sentience, which will *hopefully* happen some day (and also *hopefully* not create something along the lines of Ultron or Skynet).
 
-Currently, most of my time is going into a research project with Dr. Nakul Verma at Columbia's Computer Science department and a subcontract software engineering job at DATAFLUCT, Inc.
+Currently, most of my time is going into a research project with Professor Verma at Columbia's Computer Science department and a subcontract software engineering job at DATAFLUCT, Inc.
 
-I'm currently working on research on Representation Learning—specifically, regarding the mathematical properties of the Skip-Gram model. While there's already been a significant amount of research done on the underlying properties of the Skip-Gram model, it suffices to say that we still don't understood it too well and we don't have good explanations as to why the model has the surprising qualities it has (additive composition, vectors occupy a narrow cone, etc.). In a nutshell, I want to see how certain changes in the Skip-Gram model affect downstream tasks and what sort of modifications lead to changes in the properties of the Skip-Gram model.
+I'm currently working on research on representation learning—specifically, looking at the  properties of the skip-gram model and working on developing new methods for word embeddings. 
+While there's already been a significant amount of research done on the underlying properties of the skip-gram model, it suffices to say that we still don't understood it too well and we don't have good explanations as to why the model has the surprising qualities it has. In a nutshell, I want to see how certain changes in the skip-gram model affect downstream tasks and what sort of modifications lead to changes in the properties of the skip-gram model. But currently, we're taking a different route and taking a shot at creating a new method for learning word embeddings, but more to come on that in the future.
 
 At DATAFLUCT, Inc, I'm currently working on developing a dialogue system that provides BI (Business Intelligence) and data analytics results as the lead (or rather, lone) software engineer for the backend (and a bit of frontend) side. Apparently I can't disclose much, but almost no ML is involved so far and most of the logic is purely heuristic. Nevertheless, it's an eye-opening experience working with (way) more experienced developers who are working on different parts of the system.
 
