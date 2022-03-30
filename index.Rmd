@@ -1,33 +1,36 @@
 ---
 title: "About"
 ---
-*WEBSITE STILL WIP*
-
-
 My name is Edward, and I'm an undergrad in the class of 2024 and an Egleston Scholar at Columbia Engineering.
 
-As of now, my main interests lie within machine learning and mathematics. My lifetime goal is to contribute to the ongoing pursuit of comprehending what exactly governs consciousness and sentience, which will *hopefully* happen some day (and also *hopefully* not create something along the lines of Ultron or Skynet).
+Currently, my main interests are in machine learning theory, but my long-term goal is to contribute to understanding what exactly governs consciousness and sentience which will hopefully happen some day in the near future (and *hopefully* not create something like Ultron or Skynet).
 
-Currently, most of my time is going into a research project with Professor Verma at Columbia's Computer Science department and a software engineering job at DATAFLUCT, Inc which I'm a part of as a subcontractor.
+Most of my time is going into two research projects with Professor Nakul Verma at Columbia's Computer Science department and a software engineering job at DATAFLUCT, Inc. where I work as a data scientist/subcontractor.
 
-I'm currently working on research on representation learning—specifically, looking at the  properties of the skip-gram model and working on developing new methods for word embeddings. 
-While there's already been a significant amount of research done on the underlying properties of the skip-gram model, it suffices to say that we still don't understood it too well and we don't have good explanations as to why the model has the surprising qualities it has. In a nutshell, I want to see how certain changes in the skip-gram model affect downstream tasks and what sort of modifications lead to changes in the properties of the skip-gram model. Currently, we're taking a shot at creating a new method for learning word embeddings that serves as an extension to the skip-gram model, but more on that to come in the future.
+&nbsp;
 
-At DATAFLUCT, Inc, I'm currently working on developing a dialogue system API that provides BI (Business Intelligence) and data analytics results as the lone dev for the backend (and a bit of frontend) side. Apparently I can't disclose much, but almost no ML is involved so far and most of the logic is purely heuristic. Nevertheless, it's an eye-opening experience working with (way) more experienced developers who are working on different parts of the system.
+For research, I'm currently looking at the mathematical properties of the skip-gram model (also known as word2vec) and trying to debunk whether its properties are unique to skip-gram or if it's derived from a more fundamental concept that other learning algorithms also inconspicuously harbor. A decent amount of work has already been done on identifying the underlying properties of the skip-gram model, but we still haven't understood it too well even though it's considered to be the "state-of-the-art" word embedding method. 
 
-Up until recently, I was also in Columbia Space Initiative (CSI), Columbia's space-themed club. I was in the RASC-AL team that participates in an annual student competition to design deep space mission concepts. Specifically, I was in charge of designing the propulsion systems (more or less just reading past papers on the topic and coming up with new designs based on previously successful missions). While I was in Columbia's Formula Racing Club (FSAE), I was working on tire simulation; specifically, applying curve-fitting and coefficient optimization on Pacejka's Magic Formula.
+In a nutshell, the word embeddings skip-gram produces induce the concept of analogies in vector arithmetic form (i.e. a famous example being "woman is to man as queen is to king," and $\vec{woman} - \vec{man} + \vec{king} \approx \vec{queen}$ holds, and $\vec{king} - \vec{man}$ gives the representation of the concept of "royalty"), and the relationship has been proven to be strictly equal when the corpus skip-gram is trained on has certain properties (i.e., uniform word distribution instead of a Zeta distribution, which conventional natural language documents generally adhere to). 
 
-In my free time, I like to program—mainly simulations that I find interesting to see what would happen and reinforcement learning agents to train on the games I make. I also like making robots and tinkering.
+I want to find out whether this property skip-gram has is unique by construction of skip-gram, or if other learning methods can also induce the concept of analogies in the word embeddings they learn when certain conditions hold.
 
-If you're interested, here are a few miscellaneous links (most are in Japanese) where I appear:
+My other research project is more development-focused; namely, I'm looking at ways to improve a learning algorithm that jointly learns dimensionality reduction (or, more specifically, feature extraction) and clustering during training time (also known as deep embedded clustering, or DEC) by replacing the dimensionality reduction part with something else. More on this to come in the future.
 
+&nbsp;
+
+At DATAFLUCT, Inc, I'm working on developing a dialogue system that provides BI (Business Intelligence) and data analytics results. The end goal is to have an API that can crunch corporate data (guilty as charged for using such a hand-wavy phrase) and give out meaningful replies to users who inquire about trends in their data.
+
+&nbsp;
+
+During freshman year, I was in Columbia Space Initiative (CSI) and joined the RASC-AL team that participates in an annual student competition to design space mission concepts. I was in charge of coming up with a reasonable propulsion system (more or less just reading past papers on the topic and coming up with new designs based on previously successful missions). While I was in Columbia's Formula Racing Club (FSAE), I was working on tire simulation; specifically, applying curve-fitting and coefficient optimization on Pacejka's Magic Formula.
+
+In my free time, I like to code and work on ideas that randomly pop out-things like simulations that I find interesting, reinforcement learning agents to train on the games I make, or just some random tools that I think could be useful for some people including myself. I also like tinkering, skimming math books before bed, and making LaTeX documents on things I want to make sure I understand properly; I'm planning to work on a machine learning and unsupervised learning pseudo-textbook during the summer of 2022.
+
+Here are a few miscellaneous links (most are in Japanese) where I appear:
 - [The Egleston Scholars: Weida (Edward) Li](https://www.engineering.columbia.edu/egleston-scholars/weida-edward-li)
 - [江副記念財団学術部門第四十九期生：李 為達](https://www.recruit-foundation.org/academic/li/)
 - [Containerインタビュー：李 為達](https://container-web.jp/people/15564.html)
 - [現役高校生チーム、アメリカのロボット大会に臨む！](https://newswitch.jp/p/10882)
 
-Feel free to reach out to me for anything!
-
-- CV: [My CV (Updated Dec. 2021)](CV-updated_dec_2021.pdf)
 - Email: [wl2787@columbia.edu](mailto:wl2787@columbia.edu)
-- GitHub: [NarutatsuRi](https://github.com/narutatsuri)
