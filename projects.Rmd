@@ -4,15 +4,15 @@ title: "Projects"
 
 Here's a list of projects I've worked on in the past. 
 
-*(Sorry, I still haven't made any posts describing exactly how they work)*
+*(Work in progress)*
 
 ## Projects related to Reinforcement Learning
 
-### [RL-basketball](RL-basketball.html)
+### [RL-basketball](Projects/RL-basketball.html)
 Reinforcement learning agent learns to shoot three-pointers.
 
 ***
-### [RL-blockavoidinggame](RL-blockavoidinggame.html)
+### [RL-blockavoidinggame](Projects/RL-blockavoidinggame.html)
 DQN on a simple block avoiding game.
 
 ***

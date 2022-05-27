@@ -1,16 +1,12 @@
 name: "edwards-website"
 output_dir: "."
 navbar:
-  title: "Edward's Website"
+  title: "Narutatsu (Edward) Ri"
   left:
     - text: "About"
       href: index.html
-    - text: "My Story"
-      href: my_story.html
-    - text: "Projects"
-      href: projects.html
-    - text: "Tutorials"
-      href: tutorials.html
+    - text: "Blog"
+      href: blog.html
 output:
   html_document:
     theme: flatly

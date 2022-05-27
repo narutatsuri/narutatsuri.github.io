@@ -1,36 +1,26 @@
 ---
 title: "About"
 ---
-My name is Edward, and I'm an undergrad in the class of 2024 and an Egleston Scholar at Columbia Engineering.
+My name is Edward, and I'm an undergrad in the class of 2024 and an Egleston Scholar at Columbia Engineering. 
 
-Currently, my main interests are in machine learning theory, but my long-term goal is to contribute to understanding what exactly governs consciousness and sentience which will hopefully happen some day in the near future (and *hopefully* not create something like Ultron or Skynet).
-
-Most of my time is going into two research projects with Professor Nakul Verma at Columbia's Computer Science department and a software engineering job at DATAFLUCT, Inc. where I work as a data scientist/subcontractor.
+My main interests are in machine learning theory and computational neuroscience, and most of my time is going into two research projects with Professor Nakul Verma at Columbia's Computer Science department and a software engineering job at DATAFLUCT, Inc. where I work as a software engineer.
 
 &nbsp;
 
-For research, I'm currently looking at the mathematical properties of the skip-gram model (also known as word2vec) and trying to debunk whether its properties are unique to skip-gram or if it's derived from a more fundamental concept that other learning algorithms also inconspicuously harbor. A decent amount of work has already been done on identifying the underlying properties of the skip-gram model, but we still haven't understood it too well even though it's considered to be the "state-of-the-art" word embedding method. 
+For research, I'm currently looking at the properties of the skip-gram model (a neural network language model, which is one of the two underlying models for the more well-known word2vec) and trying to debunk whether its properties are unique to skip-gram or if it's derived from a more fundamental concept that other learning algorithms also inconspicuously harbor. A decent amount of work has already been done on identifying the underlying properties of the skip-gram model, but we still haven't understood it too well even though it's considered to be the "state-of-the-art" word embedding method. 
 
-In a nutshell, the word embeddings skip-gram produces induce the concept of analogies in vector arithmetic form (i.e. a famous example being "woman is to man as queen is to king," and $\vec{woman} - \vec{man} + \vec{king} \approx \vec{queen}$ holds, and $\vec{king} - \vec{man}$ gives the representation of the concept of "royalty"), and the relationship has been proven to be strictly equal when the corpus skip-gram is trained on has certain properties (i.e., uniform word distribution instead of a Zeta distribution, which conventional natural language documents generally adhere to). 
+In a nutshell, the word embeddings skip-gram produces induce the concept of analogies in vector arithmetic form (i.e. a famous example being "woman is to man as queen is to king," and $\vec{woman} - \vec{man} + \vec{king} \approx \vec{queen}$ holds, and $\vec{king} - \vec{man}$ gives the representation of the concept of "royalty"), and the relationship has been proven to be strictly equal when the corpus skip-gram is trained on has certain properties (i.e., uniform word distribution instead of a Zeta distribution, which conventional natural language documents generally adhere to). I want to find out whether this property skip-gram has is unique by construction of skip-gram, or if other learning methods can also induce the concept of analogies in the word embeddings they learn when certain conditions hold.
 
-I want to find out whether this property skip-gram has is unique by construction of skip-gram, or if other learning methods can also induce the concept of analogies in the word embeddings they learn when certain conditions hold.
-
-My other research project is more development-focused; namely, I'm looking at ways to improve a learning algorithm that jointly learns dimensionality reduction (or, more specifically, feature extraction) and clustering during training time (also known as deep embedded clustering, or DEC) by replacing the dimensionality reduction part with something else. More on this to come in the future.
+My other research project is more development-focused; namely, I'm looking at ways to improve a learning algorithm that jointly learns dimensionality reduction (or, more specifically, feature extraction) and clustering during training time (also known as deep embedded clustering, or DEC) by replacing the dimensionality reduction part with something else. 
 
 &nbsp;
 
-At DATAFLUCT, Inc, I'm working on developing a dialogue system that provides BI (Business Intelligence) and data analytics results. The end goal is to have an API that can crunch corporate data (guilty as charged for using such a hand-wavy phrase) and give out meaningful replies to users who inquire about trends in their data.
+At DATAFLUCT, Inc, I'm working on developing a dialogue system that provides BI (Business Intelligence) and data analytics results. The end goal is to have an API that can crunch corporate data (guilty as charged for using such a hand-wavy phrase) and give out meaningful replies to users who inquire about trends in their data. As of May 2022, I am currently on hiatus from DATAFLUCT, Inc.
 
 &nbsp;
 
-During freshman year, I was in Columbia Space Initiative (CSI) and joined the RASC-AL team that participates in an annual student competition to design space mission concepts. I was in charge of coming up with a reasonable propulsion system (more or less just reading past papers on the topic and coming up with new designs based on previously successful missions). While I was in Columbia's Formula Racing Club (FSAE), I was working on tire simulation; specifically, applying curve-fitting and coefficient optimization on Pacejka's Magic Formula.
+From June 2022, I will be working on an independent research project to analyze the geometric properties of manifolds in contextual embedding spaces for deep language models under Professor Mingbo Cai at IRCN (International Research Center for Neurointelligence, The University of Tokyo). 
 
-In my free time, I like to code and work on ideas that randomly pop out-things like simulations that I find interesting, reinforcement learning agents to train on the games I make, or just some random tools that I think could be useful for some people including myself. I also like tinkering, skimming math books before bed, and making LaTeX documents on things I want to make sure I understand properly; I'm planning to work on a machine learning and unsupervised learning pseudo-textbook during the summer of 2022.
+I plan to work for a lab at Janelia Research Campus on using reinforcement learning to learn the dynamics of *Drosophila* in a few months. More on this to come in the future.
 
-Here are a few miscellaneous links (most are in Japanese) where I appear:
-- [The Egleston Scholars: Weida (Edward) Li](https://www.engineering.columbia.edu/egleston-scholars/weida-edward-li)
-- [江副記念財団学術部門第四十九期生：李 為達](https://www.recruit-foundation.org/academic/li/)
-- [Containerインタビュー：李 為達](https://container-web.jp/people/15564.html)
-- [現役高校生チーム、アメリカのロボット大会に臨む！](https://newswitch.jp/p/10882)
 
-- Email: [wl2787@columbia.edu](mailto:wl2787@columbia.edu)

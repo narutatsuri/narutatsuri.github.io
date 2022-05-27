@@ -1,4 +1,0 @@
----
-title: "RL-blockavoidinggame"
-output: html_document
----
