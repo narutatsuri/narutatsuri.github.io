@@ -13,8 +13,8 @@
 
 <title>About</title>
 
-<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -60,6 +60,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -80,6 +81,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -232,7 +236,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -270,22 +274,82 @@ $(document).ready(function () {
 </div>
 
 
-<p>My name is Edward, and I’m an undergrad in the class of 2024 and an Egleston Scholar at Columbia Engineering.</p>
-<p>Currently, my main interests are in machine learning theory, but my long-term goal is to contribute to understanding what exactly governs consciousness and sentience which will hopefully happen some day in the near future (and <em>hopefully</em> not create something like Ultron or Skynet).</p>
-<p>Most of my time is going into two research projects with Professor Nakul Verma at Columbia’s Computer Science department and a software engineering job at DATAFLUCT, Inc. where I work as a data scientist/subcontractor.</p>
+<p>My name is Edward, and I’m an undergrad in the class of 2024 and an
+Egleston Scholar at Columbia Engineering.</p>
+<p>Currently, my main interests are in machine learning theory, but my
+long-term goal is to contribute to understanding what exactly governs
+consciousness and sentience which will hopefully happen some day in the
+near future (and <em>hopefully</em> not create something like Ultron or
+Skynet).</p>
+<p>Most of my time is going into two research projects with Professor
+Nakul Verma at Columbia’s Computer Science department and a software
+engineering job at DATAFLUCT, Inc. where I work as a data
+scientist/subcontractor.</p>
 <p> </p>
-<p>For research, I’m currently looking at the mathematical properties of the skip-gram model (also known as word2vec) and trying to debunk whether its properties are unique to skip-gram or if it’s derived from a more fundamental concept that other learning algorithms also inconspicuously harbor. A decent amount of work has already been done on identifying the underlying properties of the skip-gram model, but we still haven’t understood it too well even though it’s considered to be the “state-of-the-art” word embedding method.</p>
-<p>In a nutshell, the word embeddings skip-gram produces induce the concept of analogies in vector arithmetic form (i.e. a famous example being “woman is to man as queen is to king,” and <span class="math inline">\(\vec{woman} - \vec{man} + \vec{king} \approx \vec{queen}\)</span> holds, and <span class="math inline">\(\vec{king} - \vec{man}\)</span> gives the representation of the concept of “royalty”), and the relationship has been proven to be strictly equal when the corpus skip-gram is trained on has certain properties (i.e., uniform word distribution instead of a Zeta distribution, which conventional natural language documents generally adhere to).</p>
-<p>I want to find out whether this property skip-gram has is unique by construction of skip-gram, or if other learning methods can also induce the concept of analogies in the word embeddings they learn when certain conditions hold.</p>
-<p>My other research project is more development-focused; namely, I’m looking at ways to improve a learning algorithm that jointly learns dimensionality reduction (or, more specifically, feature extraction) and clustering during training time (also known as deep embedded clustering, or DEC) by replacing the dimensionality reduction part with something else. More on this to come in the future.</p>
+<p>For research, I’m currently looking at the mathematical properties of
+the skip-gram model (also known as word2vec) and trying to debunk
+whether its properties are unique to skip-gram or if it’s derived from a
+more fundamental concept that other learning algorithms also
+inconspicuously harbor. A decent amount of work has already been done on
+identifying the underlying properties of the skip-gram model, but we
+still haven’t understood it too well even though it’s considered to be
+the “state-of-the-art” word embedding method.</p>
+<p>In a nutshell, the word embeddings skip-gram produces induce the
+concept of analogies in vector arithmetic form (i.e. a famous example
+being “woman is to man as queen is to king,” and <span
+class="math inline">\(\vec{woman} - \vec{man} + \vec{king} \approx
+\vec{queen}\)</span> holds, and <span class="math inline">\(\vec{king} -
+\vec{man}\)</span> gives the representation of the concept of
+“royalty”), and the relationship has been proven to be strictly equal
+when the corpus skip-gram is trained on has certain properties (i.e.,
+uniform word distribution instead of a Zeta distribution, which
+conventional natural language documents generally adhere to).</p>
+<p>I want to find out whether this property skip-gram has is unique by
+construction of skip-gram, or if other learning methods can also induce
+the concept of analogies in the word embeddings they learn when certain
+conditions hold.</p>
+<p>My other research project is more development-focused; namely, I’m
+looking at ways to improve a learning algorithm that jointly learns
+dimensionality reduction (or, more specifically, feature extraction) and
+clustering during training time (also known as deep embedded clustering,
+or DEC) by replacing the dimensionality reduction part with something
+else. More on this to come in the future.</p>
 <p> </p>
-<p>At DATAFLUCT, Inc, I’m working on developing a dialogue system that provides BI (Business Intelligence) and data analytics results. The end goal is to have an API that can crunch corporate data (guilty as charged for using such a hand-wavy phrase) and give out meaningful replies to users who inquire about trends in their data.</p>
+<p>At DATAFLUCT, Inc, I’m working on developing a dialogue system that
+provides BI (Business Intelligence) and data analytics results. The end
+goal is to have an API that can crunch corporate data (guilty as charged
+for using such a hand-wavy phrase) and give out meaningful replies to
+users who inquire about trends in their data.</p>
 <p> </p>
-<p>During freshman year, I was in Columbia Space Initiative (CSI) and joined the RASC-AL team that participates in an annual student competition to design space mission concepts. I was in charge of coming up with a reasonable propulsion system (more or less just reading past papers on the topic and coming up with new designs based on previously successful missions). While I was in Columbia’s Formula Racing Club (FSAE), I was working on tire simulation; specifically, applying curve-fitting and coefficient optimization on Pacejka’s Magic Formula.</p>
-<p>In my free time, I like to code and work on ideas that randomly pop out-things like simulations that I find interesting, reinforcement learning agents to train on the games I make, or just some random tools that I think could be useful for some people including myself. I also like tinkering, skimming math books before bed, and making LaTeX documents on things I want to make sure I understand properly; I’m planning to work on a machine learning and unsupervised learning pseudo-textbook during the summer of 2022.</p>
-<p>Here are a few miscellaneous links (most are in Japanese) where I appear: - <a href="https://www.engineering.columbia.edu/egleston-scholars/weida-edward-li">The Egleston Scholars: Weida (Edward) Li</a> - <a href="https://www.recruit-foundation.org/academic/li/">江副記念財団学術部門第四十九期生：李 為達</a> - <a href="https://container-web.jp/people/15564.html">Containerインタビュー：李 為達</a> - <a href="https://newswitch.jp/p/10882">現役高校生チーム、アメリカのロボット大会に臨む！</a></p>
+<p>During freshman year, I was in Columbia Space Initiative (CSI) and
+joined the RASC-AL team that participates in an annual student
+competition to design space mission concepts. I was in charge of coming
+up with a reasonable propulsion system (more or less just reading past
+papers on the topic and coming up with new designs based on previously
+successful missions). While I was in Columbia’s Formula Racing Club
+(FSAE), I was working on tire simulation; specifically, applying
+curve-fitting and coefficient optimization on Pacejka’s Magic
+Formula.</p>
+<p>In my free time, I like to code and work on ideas that randomly pop
+out-things like simulations that I find interesting, reinforcement
+learning agents to train on the games I make, or just some random tools
+that I think could be useful for some people including myself. I also
+like tinkering, skimming math books before bed, and making LaTeX
+documents on things I want to make sure I understand properly; I’m
+planning to work on a machine learning and unsupervised learning
+pseudo-textbook during the summer of 2022.</p>
+<p>Here are a few miscellaneous links (most are in Japanese) where I
+appear: - <a
+href="https://www.engineering.columbia.edu/egleston-scholars/weida-edward-li">The
+Egleston Scholars: Weida (Edward) Li</a> - <a
+href="https://www.recruit-foundation.org/academic/li/">江副記念財団学術部門第四十九期生：李
+為達</a> - <a
+href="https://container-web.jp/people/15564.html">Containerインタビュー：李
+為達</a> - <a
+href="https://newswitch.jp/p/10882">現役高校生チーム、アメリカのロボット大会に臨む！</a></p>
 <ul>
-<li>Email: <a href="mailto:wl2787@columbia.edu">wl2787@columbia.edu</a></li>
+<li>Email: <a
+href="mailto:wl2787@columbia.edu">wl2787@columbia.edu</a></li>
 </ul>
 
 

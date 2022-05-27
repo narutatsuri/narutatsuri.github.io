@@ -13,8 +13,8 @@
 
 <title>My Story</title>
 
-<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -60,6 +60,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -80,6 +81,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -232,7 +236,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -270,14 +274,70 @@ $(document).ready(function () {
 </div>
 
 
-<p><em>The passage on Columbia Engineering’s website summarizes my story quite neatly, so I’m just going to put that here with a few edits here and there.</em></p>
-<div id="from-the-outskirts-of-tokyo-edward-li-has-been-fascinated-by-the-idea-of-intelligent-lifeforms-since-he-was-six-years-old.-inspired-by-the-limitless-potential-of-computers-edwards-aspirations-now-lie-in-the-fields-of-artificial-intelligence-and-neuroscience-in-hopes-of-contributing-to-the-creation-of-artificial-general-intelligence-agi." class="section level3">
-<h3><strong>From the outskirts of Tokyo, Edward Li has been fascinated by the idea of intelligent lifeforms since he was six years old. Inspired by the limitless potential of computers, Edward’s aspirations now lie in the fields of Artificial Intelligence and Neuroscience in hopes of contributing to the creation of Artificial General Intelligence (AGI).</strong></h3>
-<p>While most phenomena in our world can be explained by the natural sciences such as physics and chemistry, there still exist questions that we have no clear answer to. Out of the countless unanswered enigmas, one would captivate the entirety of Edward’s childhood: What is the cause of sentience and intelligence? Edward’s passion for science bloomed when he was six years old; inspired by the idea of extraterrestrial life beyond our atmosphere, Edward would often observe the stars with his homemade telescope every night. His obsession for astronomy would carry on until 8th grade when he watched “Avengers: Age of Ultron,” a science fiction movie centered around an AI created by the superhero Iron Man with the power of technology. Intrigued by the idea of creating sentient beings with 0s and 1s, Edward began his journey into Computer Science, Robotics, and Neuroscience in hopes of achieving similar feats.</p>
-<p>After teaching himself computer programming, machine learning and neuroscience with college textbooks and online resources such as Andrew Ng’s Machine Learning course, Edward would focus a large portion of his time towards devising an idea for chatbots—a type of AI that could simulate human-like conversations. The “Eureka” moment would come to pass two years after his journey began; however, he didn’t possess the required tools and knowledge to realize his idea. Thus, Edward contacted university professors in hopes of finding a mentor for his research, and he was lucky enough to have one hold an interest in his idea.</p>
-<p>Passing a mandatory test formally designed for master’s and doctorate students, Edward was able to join the professor’s lab and begin his research which he would continue for two and a half years. He was able to create a chatbot that extracted hidden intents from the conversation and utilize this information as inputs to generate responses. After publishing a paper and presenting his research at Japan’s largest international AI conference with more than 3000 attendees as the youngest published researcher in history, Edward’s aspirations to discover the crux of intelligence continues to this day. Attending Columbia with a full-ride scholarship provided by the Ezoe Memorial Recruit Foundation, Edward plans to major in Computer Science while deepening his knowledge in Neuroscience and apply what he learns to his research.</p>
-<p>Besides spending all-nighters at his research lab, Edward participated in various tournaments during his high school years. Securing second place in national programming contests and winning first place at university robotics contests where he wrote code for converting human language to robot commands, Edward also preserved his interests towards space and created clubs dedicated to space exploration at his school and partook in contests in which his team was selected as finalists. He also served as the captain of Japan’s first FIRST Robotics Competition (FRC) team; starting with nothing but a few high school students with no adult professionals, Edward’s team gathered resources by themselves through contacting companies and crowdfunding.</p>
-<p>In his free time, Edward loves to read and think philosophy—he believes a true scientist cannot simply indulge themselves in their field and rather needs to be able to view the world from multiple perspectives. He also spends his free time tinkering and creating robots with new parts and leftover scraps, and writing code for reinforcement learning agents that learn to play games and complete tasks.</p>
+<p><em>The passage on Columbia Engineering’s website summarizes my story
+quite neatly, so I’m just going to put that here with a few edits here
+and there.</em></p>
+<div
+id="from-the-outskirts-of-tokyo-edward-li-has-been-fascinated-by-the-idea-of-intelligent-lifeforms-since-he-was-six-years-old.-inspired-by-the-limitless-potential-of-computers-edwards-aspirations-now-lie-in-the-fields-of-artificial-intelligence-and-neuroscience-in-hopes-of-contributing-to-the-creation-of-artificial-general-intelligence-agi."
+class="section level3">
+<h3><strong>From the outskirts of Tokyo, Edward Li has been fascinated
+by the idea of intelligent lifeforms since he was six years old.
+Inspired by the limitless potential of computers, Edward’s aspirations
+now lie in the fields of Artificial Intelligence and Neuroscience in
+hopes of contributing to the creation of Artificial General Intelligence
+(AGI).</strong></h3>
+<p>While most phenomena in our world can be explained by the natural
+sciences such as physics and chemistry, there still exist questions that
+we have no clear answer to. Out of the countless unanswered enigmas, one
+would captivate the entirety of Edward’s childhood: What is the cause of
+sentience and intelligence? Edward’s passion for science bloomed when he
+was six years old; inspired by the idea of extraterrestrial life beyond
+our atmosphere, Edward would often observe the stars with his homemade
+telescope every night. His obsession for astronomy would carry on until
+8th grade when he watched “Avengers: Age of Ultron,” a science fiction
+movie centered around an AI created by the superhero Iron Man with the
+power of technology. Intrigued by the idea of creating sentient beings
+with 0s and 1s, Edward began his journey into Computer Science,
+Robotics, and Neuroscience in hopes of achieving similar feats.</p>
+<p>After teaching himself computer programming, machine learning and
+neuroscience with college textbooks and online resources such as Andrew
+Ng’s Machine Learning course, Edward would focus a large portion of his
+time towards devising an idea for chatbots—a type of AI that could
+simulate human-like conversations. The “Eureka” moment would come to
+pass two years after his journey began; however, he didn’t possess the
+required tools and knowledge to realize his idea. Thus, Edward contacted
+university professors in hopes of finding a mentor for his research, and
+he was lucky enough to have one hold an interest in his idea.</p>
+<p>Passing a mandatory test formally designed for master’s and doctorate
+students, Edward was able to join the professor’s lab and begin his
+research which he would continue for two and a half years. He was able
+to create a chatbot that extracted hidden intents from the conversation
+and utilize this information as inputs to generate responses. After
+publishing a paper and presenting his research at Japan’s largest
+international AI conference with more than 3000 attendees as the
+youngest published researcher in history, Edward’s aspirations to
+discover the crux of intelligence continues to this day. Attending
+Columbia with a full-ride scholarship provided by the Ezoe Memorial
+Recruit Foundation, Edward plans to major in Computer Science while
+deepening his knowledge in Neuroscience and apply what he learns to his
+research.</p>
+<p>Besides spending all-nighters at his research lab, Edward
+participated in various tournaments during his high school years.
+Securing second place in national programming contests and winning first
+place at university robotics contests where he wrote code for converting
+human language to robot commands, Edward also preserved his interests
+towards space and created clubs dedicated to space exploration at his
+school and partook in contests in which his team was selected as
+finalists. He also served as the captain of Japan’s first FIRST Robotics
+Competition (FRC) team; starting with nothing but a few high school
+students with no adult professionals, Edward’s team gathered resources
+by themselves through contacting companies and crowdfunding.</p>
+<p>In his free time, Edward loves to read and think philosophy—he
+believes a true scientist cannot simply indulge themselves in their
+field and rather needs to be able to view the world from multiple
+perspectives. He also spends his free time tinkering and creating robots
+with new parts and leftover scraps, and writing code for reinforcement
+learning agents that learn to play games and complete tasks.</p>
 </div>
 
 
