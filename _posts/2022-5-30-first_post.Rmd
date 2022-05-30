@@ -45,6 +45,7 @@ I’m not sure how I’ll be organizing the “How?” for future sections as I�
 I’m not sure how I’ll manage to add these posts to my website as of writing this, so I’m not sure if there will be a comment feature. If there is one (and even if there isn’t one, although it will make you do a bit more work), please leave a comment if I made a mistake, or you can suggest additional resources on the topic, or any thoughts you have, or anything else. 
 
 EDIT: Still struggling to add a comment section. 
+EDIT 2: Never mind, but you apparently need a GitHub account...
 
 ### Resource List:
 None, of course.
