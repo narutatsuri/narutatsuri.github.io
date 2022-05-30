@@ -1,0 +1,12 @@
+name: "edwards-website"
+output_dir: "."
+navbar:
+  title: "Narutatsu (Edward) Ri"
+  left:
+    - text: "About"
+      href: ../index.html
+    - text: "Blog"
+      href: ../blog.html
+output:
+  html_document:
+    theme: flatly
