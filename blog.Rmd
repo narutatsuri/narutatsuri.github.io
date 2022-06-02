@@ -1,13 +1,11 @@
 ---
 title: "Blog"
 ---
-<!---
 ***
-### [Transduction](_posts/2022-5-30-transduction.html)
-*May 30th, 2022*
+### [Transduction](_posts/2022-6-2-transduction.html)
+*June 2nd, 2022*
 
 What the heck is transduction in machine learning?
---->
 
 ***
 ### [First Post](_posts/2022-5-30-first_post.html)

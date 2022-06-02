@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+<meta name="date" content="2022-06-02" />
+
+<title>Transduction (No Math)</title>
+
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Narutatsu (Edward) Ri</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="../index.html">About</a>
+</li>
+<li>
+  <a href="../blog.html">Blog</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Transduction (No Math)</h1>
+<h4 class="date">June 2, 2022</h4>
+
+</div>
+
+
+<p><em>Disclaimer: I’m no expert, not even close. </em></p>
+<p><em>Also, I realized this post resulted in a very similar structure
+to existing posts on transduction, which is kind of sad. </em></p>
+<p><em>This post will not talk about the rigorous details of
+transduction (thank god), maybe in a future post.</em></p>
+<p> </p>
+<p>The origins of why I specifically decided to write about transduction
+(which seems like a topic maybe three people in the world care about,
+which isn’t quite true (not only in the literal sense)) is because I had
+an idea of combining k Nearest Neighbors and bootstrapping (in the
+machine learning sense, not the statistical sense, though they’re
+closely related idea-wise) and I happened to find a certain algorithm in
+transductive learning that I didn’t know about. More details in the
+Additional Notes section.</p>
+<div id="what" class="section level3">
+<h3>What?</h3>
+<p>Transduction is a method of learning (in general, not in machine
+learning terms of “learning”) and it’s often compared to induction.
+Usually, transduction is talked about in rigor in a statistical learning
+theory course, but let’s not go there because I don’t consider myself
+worthy of even atempting to explain statistical learning theory.</p>
+<div id="definition" class="section level4">
+<h4>Definition</h4>
+<p>Definition-wise, according to Wikipedia (which probably explains it
+way better than I do), transduction is “reasoning from observed,
+specific (training) cases to specific (test) cases” and induction is
+“reasoning from observed training cases to general rules, which are then
+applied to the test cases.”</p>
+<p>In softer terms, induction is when you’re given a few data points and
+you try to learn a general model that fits these data points and you use
+this model to figure out the cases for new points you encounter. This is
+quite literally what supervised learning is; you’re given data points
+which you consider your training set, you fit a function (or more
+generally, a model) to it which you call, well, your model, and you
+predict on other data points which you call your test data.</p>
+<p>On the other hand, transduction uses your training set and directly
+predicts on your test data by using some other information present in
+the data you’re given. This can be something like some form of
+similarity metric such as pairwise Euclidean distance between data
+points if you assume you’re operating in Euclidean space; if your point
+is close to a point that’s already labeled, we assign it the same label.
+I know this sounds something like k Nearest Neighbors (because that’s
+what I thought at first too, or maybe I’m just dense I don’t know), but
+kNN is not a transductive learning method (but there apparently are
+transductive learning variants of kNN) because while it’s non-parametric
+it technically considers the training data as a model. Also,
+transduction is considered a semi-supervised learning method.</p>
+<p>Two key differences between induction and transduction is:</p>
+<ul>
+<li>Induction has the “learn a generalized model” step while
+transduction doesn’t</li>
+<li>Transduction uses information present in the data and figures out a
+pattern</li>
+</ul>
+</div>
+</div>
+<div id="why" class="section level3">
+<h3>Why?</h3>
+<p>Sure, that’s cool (and doesn’t really make intuitive sense), but
+WHY?</p>
+<p>Let’s look at the pros and cons of both transductive and inductive
+learning. In a nutshell, induction breaks down in some instances (and
+vice-versa, of course), and in some of those instances we might be able
+to apply transduction.</p>
+<div id="pros-and-cons-transductive-vs.-inductive-methods"
+class="section level4">
+<h4>Pros and Cons: Transductive vs. Inductive Methods</h4>
+<p>Inductive</p>
+<ul>
+<li>Pros
+<ul>
+<li>Once training is done, you have a model. Prediction isn’t costly
+(relatively to transduction) because you just apply your model to your
+test points.</li>
+</ul></li>
+<li>Cons
+<ul>
+<li>Nobody said your training data is perfect. So, your model might
+(technically, will) have some form of bias.</li>
+</ul></li>
+</ul>
+<p>Transductive</p>
+<ul>
+<li>Pros
+<ul>
+<li>Known to have better performance in case-by-case scenarios (like the
+one we’ll talk about later). Intuitively speaking (my intuition, don’t
+trust it), transduction seems to have ironically more generalization
+properties than induction. When you try to fit a model to your data, you
+are essentially making a modeling assumption that the model you’re using
+is a reasonable, but how can you say your assumption is valid (which is
+a well-known issue in machine learning)?</li>
+</ul></li>
+<li>Cons
+<ul>
+<li>Computationally expensive. When you’re given a new test data,
+theoretically speaking, you need to rerun the whole process again
+because transductive learning looks at the training and test data and
+considers them all when assigning labels to the test data. This means
+that the performance of transductive learning is terrible for things
+like online learning (where you have a stream of data points coming in
+sequentially) because you need to rerun the whole freaking process for
+each new point. Your predictions are based on what you currently
+observer for the training and test data. So, you cannot judge points
+that you have not observed, meaning inference is a pain in the
+arse.</li>
+</ul></li>
+</ul>
+</div>
+<div id="working-example-of-transductive-vs.-inductive-methods"
+class="section level4">
+<h4>Working Example of Transductive vs. Inductive Methods</h4>
+<p><em>Disclaimer: Yup, I stole this example from other resources but
+they just explained it too well. Sorry. Picture credits go to reference
+number 2.</em></p>
+<center>
+<img src="2022-6-2-transduction/1.png" />
+</center>
+<p>Let’s say you’re given the data points above (let’s ignore all the
+mathy details like “do we have a defined metric,” “what space are we
+operating in,” yada yada) . The possible labels are Red or Green. The
+labeled ones are your training data and the white points are your test
+data that you want to color either Red or Green.</p>
+<p>Let’s say we run a vanilla k Nearest Neighbors algorithm on the
+above. We get something like the below:</p>
+<center>
+<img src="2022-6-2-transduction/2.png" />
+</center>
+<p>This doesn’t fit our intuition, because our human instincts tell us
+that the six points on the left should be one group (I dare not say
+cluster because this is supervised learning) and the rest on the right
+should be another group. But based on how kNN operates, this is what
+happens.</p>
+Now, let’s apply transduction. If we apply something called a
+graph-based variant of the label propagation algorithm (which we’ll talk
+about in the next section), we first construct a graph with all the
+points and then propagate the labes according to the graph we
+constructed by proximity, we get the below:
+<center>
+<img src="2022-6-2-transduction/3.png" />
+</center>
+<p>This looks better!</p>
+<p>The difference we observed here between transduction and induction is
+exactly what we were talking about when we mentioned modeling
+assumptions of the data (in this case, modeling assumptions of kNN).</p>
+</div>
+</div>
+<div id="how" class="section level3">
+<h3>How?</h3>
+<p>Now, we talk about two main algorithms within transductive learning.
+We talked a bit about Label Propagation in the previous section, but
+let’s go a bit into detail (not comprehensively, of course).</p>
+<div id="label-propagation-algorithm-lpa" class="section level4">
+<h4>Label Propagation Algorithm (LPA)</h4>
+<p>LPA is a graph-based transductive learning method, so it requires us
+to construct a graph a priori with our data points (how you construct
+the graph, i.e. which nodes to connect with edges is entirely up to the
+user).</p>
+<p>The core idea behind LPA is that if two nodes are connected then they
+should share the same property (which makes intuitive sense).</p>
+<p>But then, sometimes you might not know the labels for all of the
+nodes connected to a particular node.</p>
+<p>Are you screwed? No; to circumvent this, LPA looks at the traversal
+probability with a random walk to a labeled node from that particular
+unlabeled node, or in simpler terms, LPA looks at the probabilities to
+arrive at all the labeled nodes from the unlabeled node (which would be
+high if the unlabeled node is close to a particular labeled node and
+vice-versa) and judges the label based on this probability and the label
+of the labeled node. In a way, it’s taking the expectation for the
+label!</p>
+<p>We agreed to not talk about math so I won’t include it here, but the
+algorithm itself in pseudocode would be something along the lines of
+calculating the probability a particular unlabeled node is attributed to
+a label based on the traversal probability for all unlabeled nodes.
+Then, we simply take the label assigned the highest probability for each
+unlabeled node and we’re done.</p>
+</div>
+<div id="transductive-support-vector-machines-transductive-svm"
+class="section level4">
+<h4>Transductive Support Vector Machines (Transductive SVM)</h4>
+<p>This part will sadly assume the understanding of the math behind SVM
+even though I promised no math, but I won’t put many equations in and
+keep the explanation short for this post (and expand the rigor maybe in
+a future post with math).</p>
+<p>The idea behind Transductive SVM is that instead of having one
+constraint for the optimization objective (which is on the labeled
+points), we also include another constraint on the unlabeled points so
+that the margin for the unlabeled points satisfy the constraint. I just
+realized this makes absolutely no sense without math, so I’ll leave it
+here as a lousy “cliffhanger” for a future post.</p>
+</div>
+</div>
+<div id="additional-notes" class="section level3">
+<h3>Additional Notes</h3>
+<p>To talk a bit more about the origins of how I stumbled across
+transductive learning, I originally worked with PU Learning (Positive
+and Unlabeled Learning) last year on a research project and I came up
+with an algorithm that took inspiration from PU Learning. Turns out PU
+Learning and transductive learning are quite similar in its motivation,
+so I apparently happened to come up with a variant of LPA.</p>
+<p>The algorithm goes like this: given a set of test points, what if we
+applied kNN to these test points, then iteratively bootstrapped on these
+test points and updated their labels depending on the labels of the
+closest points around them?</p>
+<p>I wrote some code to see how this works and compared it with vanilla
+kNN (which you can access here if you’re interested). I was also curious
+if this already existed because it seemed like a very simple idea, so I
+asked a question on r/MachineLearning on Reddit to see if that was the
+case, and some knowledgeable people pointed me in the direction of
+transductive learning. So, I decided to learn a bit about it and write a
+short post on transduction.</p>
+</div>
+<div id="resource-list" class="section level3">
+<h3>Resource List:</h3>
+<ul>
+<li><a
+href="https://en.wikipedia.org/wiki/Transduction_(machine_learning)"
+class="uri">https://en.wikipedia.org/wiki/Transduction_(machine_learning)</a></li>
+<li><a
+href="https://towardsdatascience.com/inductive-vs-transductive-learning-e608e786f7d"
+class="uri">https://towardsdatascience.com/inductive-vs-transductive-learning-e608e786f7d</a></li>
+<li><a href="https://cims.nyu.edu/~mohri/amls/aml_transduction.pdf"
+class="uri">https://cims.nyu.edu/~mohri/amls/aml_transduction.pdf</a>
+(Not referenced in this post)</li>
+<li><a
+href="https://towardsdatascience.com/label-propagation-demystified-cd5390f27472"
+class="uri">https://towardsdatascience.com/label-propagation-demystified-cd5390f27472</a></li>
+<li><a
+href="http://www.cs.cmu.edu/~guestrin/Class/10701-S06/Slides/tsvms-pca.pdf"
+class="uri">http://www.cs.cmu.edu/~guestrin/Class/10701-S06/Slides/tsvms-pca.pdf</a>
+(Not really referenced either)</li>
+</ul>
+</div>
+<div id="final-notes" class="section level3">
+<h3>Final Notes</h3>
+<p>Apologies in advance if my explanations are subpar; hopefully, I’ll
+get better at this the more I write.</p>
+<p>Hopefully.</p>
+<p>Bye!</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

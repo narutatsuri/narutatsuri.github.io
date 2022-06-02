@@ -22,7 +22,7 @@ Most of the posts will probably follow the same structure as this post, i.e.:
  - Why?
    + The section where how the topic I’m going to talk about is interesting or worth knowing about (in my own words, so might not be perfect).
  - How?
-   + The section where I talk about how the thing we’ve been talking about up until now actually works. The previous three sections should be significantly shorter than this one and they should mostly not be math-heavy (as it’ll take waaay too much time to write everything down).
+   + The section where I talk about how the thing we’ve been talking about up until now actually works. 
  - Additional Notes
    + Any additional stuff I want to mention.
  - Resource List
@@ -35,8 +35,6 @@ With all that said, I’ll try to follow this structure in my first post and con
 In recent times, I’ve realized that I’ve been bulldozering through a lot of interesting things where I read through resources in a frenzy but forget everything I read in a few months. I hope that this blog can help me concretize the things I learn and also serve as a reference for future me when I forget the specifics of what I learned.
 
 ### How?
-Hmm, I might’ve lied when I said this section should be significantly longer than the other posts.
-
 The “How” for this post is pretty self-explanatory; I’ll just be be posting stuff here once in a while (I’m not sure about the frequency yet). 
 
 I’m not sure how I’ll be organizing the “How?” for future sections as I’m sure the optimal structure will vary depending on the specific topic, so I’ll keep it flexible but hopefully they’ll still be logically easy to follow.
@@ -45,6 +43,7 @@ I’m not sure how I’ll be organizing the “How?” for future sections as I�
 I’m not sure how I’ll manage to add these posts to my website as of writing this, so I’m not sure if there will be a comment feature. If there is one (and even if there isn’t one, although it will make you do a bit more work), please leave a comment if I made a mistake, or you can suggest additional resources on the topic, or any thoughts you have, or anything else. 
 
 EDIT: Still struggling to add a comment section. 
+
 EDIT 2: Never mind, but you apparently need a GitHub account...
 
 ### Resource List:
