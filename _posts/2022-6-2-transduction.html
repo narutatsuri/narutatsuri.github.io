@@ -313,10 +313,11 @@ points if you assume you’re operating in Euclidean space; if your point
 is close to a point that’s already labeled, we assign it the same label.
 I know this sounds something like k Nearest Neighbors (because that’s
 what I thought at first too, or maybe I’m just dense I don’t know), but
-kNN is not a transductive learning method (but there apparently are
-transductive learning variants of kNN) because while it’s non-parametric
-it technically considers the training data as a model. Also,
-transduction is considered a semi-supervised learning method.</p>
+kNN is not a transductive learning method (but there apparently are <a
+href="https://www.cs.cornell.edu/people/tj/publications/joachims_03a.pdf">transductive
+learning variants of kNN</a>) because while it’s non-parametric it
+technically considers the training data as a model. Also, transduction
+is considered a semi-supervised learning method.</p>
 <p>Two key differences between induction and transduction is:</p>
 <ul>
 <li>Induction has the “learn a generalized model” step while
@@ -475,12 +476,14 @@ applied kNN to these test points, then iteratively bootstrapped on these
 test points and updated their labels depending on the labels of the
 closest points around them?</p>
 <p>I wrote some code to see how this works and compared it with vanilla
-kNN (which you can access here if you’re interested). I was also curious
-if this already existed because it seemed like a very simple idea, so I
-asked a question on r/MachineLearning on Reddit to see if that was the
-case, and some knowledgeable people pointed me in the direction of
-transductive learning. So, I decided to learn a bit about it and write a
-short post on transduction.</p>
+kNN (which you can access <a
+href="https://github.com/narutatsuri/bootstrap-kNN">here</a> if you’re
+interested). I was also curious if this already existed because it
+seemed like a very simple idea, so I asked a question on
+r/MachineLearning on Reddit to see if that was the case, and some
+knowledgeable people pointed me in the direction of transductive
+learning. So, I decided to learn a bit about it and write a short post
+on transduction.</p>
 </div>
 <div id="resource-list" class="section level3">
 <h3>Resource List:</h3>
