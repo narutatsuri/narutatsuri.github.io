@@ -5,7 +5,7 @@ date: "June 13, 2022"
 ## What?
 Deep Embedded Clustering (DEC) is a method that jointly learns cluster centroids for Lloyd’s Algorithm for the KMeans problem and a non-linear re-representation of the data in a reduced dimension; i.e., it combines dimensionality reduction with clustering, two tasks that are usually applied sequentially. It was introduced in 2016 (and hence why this post is a bit too late) in the paper “Unsupervised Deep Embedding for Clustering Analysis (Junyuan Xie, Ross Girshick, Ali Farhadi)” (link to the paper at the end of the post in Resource List) 
 
-I happened to learn about DEC because I took a shot at reimplementing the model from scratch, and I decided to write a post on DEC to talk about how DEC works and the results I got contrasted with the results the paper mentions they obtained. 
+I happened to learn about DEC because I took a shot at reimplementing the model from scratch, and I decided to write a post on DEC to talk about how DEC works and the results I got contrasted with the results the paper mentions they obtained. My code can be found [here](https://github.com/narutatsuri/deep_embedded_clustering) (be careful, I did not comment some parts yet...)
 
 ## Why?
 The motivation behind combining the two tasks is this: Say you want to do some form of clustering on your data. Regardless of of the algorithm you choose, the notion of dissimilarity must exist and the representation of your data must be “good” in the sense that points you want assigned to the same cluster should be similar in terms of distance and vice versa. 
