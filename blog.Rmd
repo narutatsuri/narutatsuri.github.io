@@ -2,10 +2,16 @@
 title: "Blog"
 ---
 ***
+### [Deep Embedded Clustering](_posts/2022-6-13-dec.html)
+*June 13th, 2022*
+
+I happened to work on reimplementing a model from a paper, and here were my results along with a brief explanation of how DEC works.
+
+***
 ### [Transduction](_posts/2022-6-2-transduction.html)
 *June 2nd, 2022*
 
-What the heck is transduction in machine learning?
+What is transduction in machine learning? Here's a very superficial explanation. 
 
 ***
 ### [First Post](_posts/2022-5-30-first_post.html)

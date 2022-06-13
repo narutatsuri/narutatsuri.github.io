@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+<meta name="date" content="2022-06-13" />
+
+<title>Deep Embedded Clustering (6 Years Too Late)</title>
+
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Narutatsu (Edward) Ri</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="../index.html">About</a>
+</li>
+<li>
+  <a href="../blog.html">Blog</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Deep Embedded Clustering (6 Years Too
+Late)</h1>
+<h4 class="date">June 13, 2022</h4>
+
+</div>
+
+
+<div id="what" class="section level2">
+<h2>What?</h2>
+<p>Deep Embedded Clustering (DEC) is a method that jointly learns
+cluster centroids for Lloyd’s Algorithm for the KMeans problem and a
+non-linear re-representation of the data in a reduced dimension; i.e.,
+it combines dimensionality reduction with clustering, two tasks that are
+usually applied sequentially. It was introduced in 2016 (and hence why
+this post is a bit too late) in the paper “Unsupervised Deep Embedding
+for Clustering Analysis (Junyuan Xie, Ross Girshick, Ali Farhadi)” (link
+to the paper at the end of the post in Resource List)</p>
+<p>I happened to learn about DEC because I took a shot at reimplementing
+the model from scratch, and I decided to write a post on DEC to talk
+about how DEC works and the results I got contrasted with the results
+the paper mentions they obtained.</p>
+</div>
+<div id="why" class="section level2">
+<h2>Why?</h2>
+<p>The motivation behind combining the two tasks is this: Say you want
+to do some form of clustering on your data. Regardless of of the
+algorithm you choose, the notion of dissimilarity must exist and the
+representation of your data must be “good” in the sense that points you
+want assigned to the same cluster should be similar in terms of distance
+and vice versa.</p>
+<p>Of course, clustering is unsupervised so the user can judge whether a
+representation is good by, for instance, quite literally eyeballing the
+resulting clusters and seeing whether the points that are together match
+your intuition or not.</p>
+<p>One way to do this would be to apply some form of metric learning,
+where you attempt to re-represent your data so that your data fits this
+notion of “good.”</p>
+<p>But you can only tell whether your metric learning shenanigans are
+applicable or not if you have a labeled dataset because then you can
+tell whether the points you want to be close to each other are actually
+close or not.</p>
+<p>The issue in the unsupervised learning case is you don’t have labels!
+Yes, you can eyeball it, but that becomes difficult when you have a lot
+of data points. What do you do?</p>
+<p>Deep Embedded Clustering (DEC) talks about one way to tackle this
+problem, and the concept itself is nothing super flashy.</p>
+<p>The idea is something akin to unsupervised metric learning where the
+“unsupervised” part is the clustering part and the “metric learning”
+part is the dimensionality reduction part. Both tasks in itself are not
+difficult; the novel part is how they connect the two to make a
+functioning model.</p>
+</div>
+<div id="how" class="section level2">
+<h2>How?</h2>
+<p>In a nutshell, DEC operates as follows:</p>
+<ol style="list-style-type: decimal">
+<li><p>Start off with an initial re-representation of your original data
+in a space with less dimensions, which is obtained in a non-linear
+fashion using a DNN.</p></li>
+<li><p>Apply clustering to your re-represented data. In their specific
+instance, they use Lloyd’s Algorithm. Now you have cluster centroids and
+a re-representation; you need a way to figure out how good the
+re-representations are.</p></li>
+<li><p>Uses a magical way to judge whether this re-representation is
+good or not (which we will talk about later)</p></li>
+<li><p>Adjust the re-representation and update the DNN that produced
+this representation and adjusts the cluster centroids for the clustering
+part.</p></li>
+<li><p>Repeat 1~4 until satisfactory.</p></li>
+</ol>
+<p>As we mentioned, the parts that are special about DEC is mainly two
+parts: how they obtain the initial embeddings (A big plot hole in the
+model is that the initial embeddings are not random but rather start off
+very well; we’ll talk about this later), and how they magically compute
+goodness of embeddings and cluster assignments. The rest either follow
+the above two or are just traditional methods.</p>
+<div id="step-1." class="section level3">
+<h3>Step 1.</h3>
+<p>They use a Stacked Autoencoder (SAE) in a certain way, which as the
+name suggests, is a model that stacks multiple autoencoders
+together.</p>
+<p>The reason why they specifically use SAE is based on previous papers
+such as “Stacked denoising autoencoders: Learning useful representations
+in a deep network with a local denoising criterion” (Vincent, Pascal,
+Larochelle, Hugo, Lajoie, Isabelle, Bengio, Yoshua, and Manzagol,
+Pierre-Antoine). There’s no formal mathematical proof to back them up;
+they’re purely based on empirical results.</p>
+Below is a generalized diagram:
+<center>
+<img src="2022-6-13-dec/1.5.png" style="width:50.0%" />
+</center>
+<p>We first construct each autoencoder individually and train them on
+our dataset with the purpose of reconstruction. Out of the autoencoders,
+we denote two of them as special ones and call them input and output
+layers. The name is because, as the name suggests, when we stack the
+autoencoders up the input layer is the first layer and the output is the
+last layer; this isn’t a very accurate description, but the below
+diagram is what the SAE would look like:</p>
+<center>
+<img src="2022-6-13-dec/1.png" style="width:50.0%" />
+</center>
+<p>We take apart each autoencoder into its encoder and decoder part, and
+stack the encoder and decoder parts and stick them together at the end.
+We then retrain the stacked model again with our dataset.</p>
+<p>After this, we only keep the encoder part and throw away the decoder
+part. This encoder part is the DNN part that we use to re-represent our
+original data in the embedded space.</p>
+</div>
+<div id="step-2." class="section level3">
+<h3>Step 2.</h3>
+<p>We now pass our data through the DNN (the encoder of the SAE) and
+obtain our initial embeddings. Now, we apply clustering to the
+re-represented data.</p>
+<p>There’s nothing much to write about this step; we apply clustering
+for the KMeans problem and we obtain cluster centroids. How we determine
+<span class="math inline">\(K\)</span> is entirely up to the user’s
+intuition as per the traditional KMeans problem.</p>
+</div>
+<div id="step-3." class="section level3">
+<h3>Step 3.</h3>
+<p>This is the special part.</p>
+<p>If the reader is familiar with the t-SNE method for data
+visualization, the idea behind t-SNE is to learn a distance converted to
+probability distribution around each point, i.e. for each point, based
+on the distance of the points around it, we model a point density
+distribution (and the weight of each point based on its distance can be
+adjusted by the user) and the idea is to reconstruct this density
+distribution as accurately as possible for each point in the
+re-represented space.</p>
+<p>Why t-SNE is only used for data visualization instead of actually
+using the embedded points for tasks is because t-SNE preserves local
+structure; there’s no guarantee that global structure is preserved.
+Meaning, the distance relationships between points is not explicitly
+preserved and thus not guaranteed to be reflective of the actual
+dataset. But that’s for another time.</p>
+<p>The authors draw inspiration from t-SNE. The idea is to define a soft
+cluster assignment <span class="math inline">\(q_{ij}\)</span> where
+<span class="math inline">\(i\)</span> is the data point and <span
+class="math inline">\(j\)</span> is the cluster label (meaning how
+likely <span class="math inline">\(i\)</span> is going to be assigned to
+<span class="math inline">\(j\)</span> given the current representation)
+and a hard cluster assignment <span
+class="math inline">\(p_{ij}\)</span> for each point.</p>
+<p>I couldn’t get myself to LateX the equations and instead decided to
+approximate with pictures:</p>
+<center>
+<p><img src="2022-6-13-dec/1.6.png" style="width:50.0%" /></p>
+<img src="2022-6-13-dec/1.7.png" style="width:30.0%" />
+</center>
+<p><span class="math inline">\(z_i\)</span> is the re-represented data
+point in the embedding space (<span class="math inline">\(z\)</span> is
+used by notation convention of autoencoders) and <span
+class="math inline">\(\mu_j\)</span> is the cluster centroids. These are
+both vector representations, so <span
+class="math inline">\(||z_i-\mu_i||^2\)</span> is the L2 norm squared,
+i.e. the Euclidean distance between data point and cluster centroid.</p>
+<p>The expression for <span class="math inline">\(q\)</span> is
+precisely the Student’s t distribution; while <span
+class="math inline">\(\alpha\)</span> can be adjusted as a
+hyperparameter, the authors of DEC set it to 1 as the original t-SNE
+paper does so. <span class="math inline">\(p\)</span> is essentially a
+normalized version of <span class="math inline">\(q\)</span>.</p>
+<p>Essentially, they are bootstrapping on the initialization and
+improving by iteration; the idea is that they want <span
+class="math inline">\(q\)</span> and <span
+class="math inline">\(p\)</span> to be close to each other as
+possible.</p>
+<p>Now, the expressions for these are, in a way, completely arbitrary;
+this isn’t the only way to accomplish the same goal.</p>
+<p>Personally, I was confused for a while on how these expressions are
+justified and how they actually lead to good re-representations when I
+read the paper. But these are modeling assumptions made by the author,
+and they are justifying it empirically by showing their results (which,
+to skip ahead, I was not able to replicate their results, but we will
+talk about that later).</p>
+</div>
+<div id="step-4." class="section level3">
+<h3>Step 4.</h3>
+<p>To compare <span class="math inline">\(p\)</span> and <span
+class="math inline">\(q\)</span>, they use standard KL Divergence
+(essentially, cross-entropy). Taking the partial derivative with respect
+to <span class="math inline">\(z\)</span> and <span
+class="math inline">\(\mu\)</span>, we obtain the gradient and update
+the embeddings and cluster centroids.</p>
+<p>We then retrain the DNN with the updated embeddings. For the cluster
+centroids, we only adjust the values.</p>
+</div>
+</div>
+<div id="additional-notes" class="section level2">
+<h2>Additional Notes</h2>
+<p>Another way to look at DEC is that they are doing a special form of
+multiclass classification. Why? Say we use a DNN to do multiclass
+classification. The output of the DNN would traditionally be a
+multinomial probability distribution, and the class we chose for the
+input would be the element of the distribution with the largest
+value.</p>
+<p>In this case, we would ideally want the output of the DEC to be a
+one-hot vector, where the index of the class that the data point is
+attributed to is 1 and the rest are 0. The burden of learning this (very
+extreme) multinomial distribution is on the DNN.</p>
+<p>DEC, in a way, is reducing the burden of the DNN by allowing the
+outputs of the DNN to be “flexible” where it can steadily drift towards
+the correct answer instead of being given a harsh one-hot vector to map
+to.</p>
+<div id="my-results-and-thoughts" class="section level3">
+<h3>My Results and Thoughts</h3>
+<p>Regarding the results I obtained,</p>
+<center>
+<img src="2022-6-13-dec/2.png" style="width:35.0%" /><img
+src="2022-6-13-dec/3.png" style="width:35.0%" /><img
+src="2022-6-13-dec/4.png" style="width:20.0%" />
+</center>
+<p>The one on the left is the initial cluster embeddings on a subset of
+the MNIST dataset, the middle the end result, and the rightmost is the
+log file of the change in KL Divergence loss.</p>
+<p>When I saw the leftmost plot, instantly a question mark popped in my
+mind: this already looks pretty good. And indeed, it was already giving
+a clustering accuracy of around 70~80%. The authors mention that SAE is
+known to give good results, but this seems… too good. Isn’t it almost
+taking the job of DEC away?</p>
+<p>Looking at the paper, there is a figure that compares KL Divergence
+with cluster accuracy (yes, it’s unsupvervised, but the dataset they use
+in this case was the MNIST dataset. Cluster labels are determined by
+majority vote and used to determine accuracy), which is Figure 5(f). The
+K-Means initialization is already giving 80% accuracy, and this is going
+up to around 85% accuracy as KL Divergence loss “converges.”</p>
+</div>
+<div id="testing-debugging" class="section level3">
+<h3>Testing &amp; Debugging</h3>
+<p>So, the next logical thing to try would be to use random
+initialization and see what we obtain. And… it didn’t work in the
+least.</p>
+<p>Left is initial embeddings applied t-SNE, right is final embeddings
+applied t-SNE.The KL Divergence loss was decreasing, but the accuracy
+for clustering hovered around a 20% without moving much.</p>
+<p>I also wanted to comment on their justification of how the clusters
+obtained from DEC are more pronounced than the initial embeddings.</p>
+<p>The diagram that they use to argue this point is a subsample of the
+dataset that they trained DEC on; i.e. they trained DEC on the entire
+MNIST dataset, and picked with uniform probability from each cluster a
+subset of points.</p>
+<p>It’s usually frowned upon to deduce properties of the data from a
+t-SNE visualization for reasons we discussed earlier, but the (implicit)
+justification in their paper is that if clusters are clearly divided
+from other clusters with margins between them, t-SNE preserves local
+structure so the original embeddings must also have the same
+property.</p>
+</div>
+<div id="other-implementations-by-other-people" class="section level3">
+<h3>Other Implementations by Other People</h3>
+<p>Of course, there were other implementations of DEC.</p>
+<p>I checked their accuracy and they actually seemed to be arriving at
+similar results as the original paper, so I thought there was an error
+in my code.</p>
+<p>Taking a further look at their code, I realized that they were kind
+of cheating in a way. While the original paper says you’re supposed to
+update <span class="math inline">\(z\)</span> and <span
+class="math inline">\(\mu\)</span> by taking the partial derivative and
+yada-yada, these implementations instead update <span
+class="math inline">\(z\)</span> and <span
+class="math inline">\(\mu\)</span> so that <span
+class="math inline">\(p\)</span> and <span
+class="math inline">\(q\)</span> are explicitly getting close to each
+other, whereas that’s supposed to be an implicit by-product of updating
+<span class="math inline">\(z\)</span> and <span
+class="math inline">\(\mu\)</span> in the way described in the paper.
+While theoretically they should be equivalent, I’m not sure if this
+approximate way of doing so is justifiable. But the authors also claim
+that minimizing KL Divergence leads to the cluster division becoming
+more emphasized, and in this aspect their method of approximation would
+not exactly be cheating.</p>
+<p>From this, I guessed the inconsistency in my results was because of
+my update method for <span class="math inline">\(z\)</span> and <span
+class="math inline">\(\mu\)</span>, as others are arriving at good
+results by using a different method.</p>
+</div>
+<div id="potential-future-directions" class="section level3">
+<h3>Potential Future Directions</h3>
+<p>There was a paper that directly builds on DEC (which happens to be
+authored by somebody who also wrote a custom implementation of DEC)
+talking about preserving local structure of the clusters before
+embedding. The idea was that while DEC tries to keep the implicit
+clusters that already existed in the original representation of the data
+and thus attempts to preserve global structure, there’s no guarantee
+what’s going on in each cluster (and it’s safe to say the local
+structure is not preserved). They try to tackle this problem.</p>
+<p>I’m personally interested in digging deeper into the modeling
+assumptions of the authors of DEC; from my personal results, I didn’t
+obtain the results that they obtained based on their modeling
+assumptions. Then the question would be, what sort of construction will
+give satisfactory results?</p>
+</div>
+</div>
+<div id="resource-list" class="section level2">
+<h2>Resource List</h2>
+<ul>
+<li><a href="https://arxiv.org/pdf/1511.06335.pdf">Unsupervised Deep
+Embedding for Clustering Analysis (Junyuan Xie, Ross Girshick, Ali
+Farhadi)</a> (Just the original paper)</li>
+</ul>
+</div>
+<div id="final-notes" class="section level2">
+<h2>Final Notes</h2>
+<p>I think it’s pretty common for papers that focus on implementation to
+seem very superficial (at least to me), especially if we look at the
+results section and see an amazing 0.1% increase in accuracy.</p>
+<p>But the real essence of papers like DEC is the novel idea behind how
+they try to combine dimensionality reduction and clustering to show that
+it’s not impossible and a potential subject to look deeper into. Also,
+their method of updating the points using <span class="math inline">\(p,
+q\)</span> is a modeling assumption they make, and we can tackle the
+reasonability of this assumption either by looking at the results and
+showing they’re good (which doesn’t talk about universal cases but is
+still considered useful because we at least know the algorithm works on
+SOME datasets), or going the hard route and showing by mathematical
+justification that things work out.</p>
+<p>Up until recently, I’ve always looked at such implementation papers
+with a skeptical eye (even though I’m in no position to do so) but I’m
+starting to be able to see the deeper and broader picture.</p>
+</div>
+
+
+
+
+</div>
+
+<script src="https://utteranc.es/client.js"
+        repo="narutatsuri/narutatsuri.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
