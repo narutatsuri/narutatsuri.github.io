@@ -1,0 +1,38 @@
+---
+title: "Paper Review: Reconstructing the cascade of language processing in the brain using the internal computations of a transformer-based language model"
+date: "July 6, 2022"
+---
+## What?
+There's been some work done in trying to connect linguistic representations in BERT and language-related cortices in the brain. Because BERT is simply a number of Transformer encoders stacked sequentially with an output layer determined by the specific task the model is used for and Transformers go through multiple steps of computations within the encoder, multiple representations are generated for the same input token. While most papers focus on the embeddings, which are the outputs of each encoder layer, this paper decided to focus on what they denote as the transformations, which are the outputs of the self-attention layer in the encoder model (a depiction of the internals of the encoder model is in the slides). 
+
+They mainly argue three things:
+ - Transformations and embeddings perform around the same on predicting brain activity (fMRI scans) 
+ - Transformations supposedly map onto the language-specific cortical hierarchy better than embeddings
+ - Transformations can be broken down into individual attention heads, and each head seems to be functionally specialized to express certain syntactic dependencies
+
+The paper itself is mostly reporting the results of their experiments and don't go into details on the "why?" parts nor do they give a detailed analysis on the graphs and numbers. 
+
+## Why?
+I'm currently working at [Cai Lab](https://cailab-ircn.org/) under IRCN over the summer. We have weekly meetings where a lab member gives a 2 hour presentation, and I happened to have the chance to present a paper on the connection between linguistic computations in the brain and representations with BERT. 
+
+## How?
+Here is a link to the [PDF](2022-7-5-ircn_paper_1.pdf). Most of the text is in black, and the texts in red are some questions I had when reading the paper. The slide serves as a detailed summary of the paper as I'm not 100% certain I covered all the specifics.
+
+## Additional Notes
+Having mostly focused my time on machine learning and theory, I had close to zero knowledge on fields such as neuroscience and it took me a few times of rereading the paper to understand the contents in detail. 
+
+As people tend to go into extensive detail into the "why?" in machine learning theory papers, I often felt like I lacked a proper understanding of the motivation of them using the transformations. For example, inside the attention layer, the computations done by each attention head is actually a linear process whereas the following MLP layer contains non-linear activation functions. I'm not sure why they didn't check the outputs from the non-linear layer and decide to focus on transformations. 
+
+I'm also a bit skeptical on trusting their final statements from each experiment they did. They mostly give a one-paragraph explanation on the results and conclude with a "therefore, we think XXX" at the end, and I'm left with the feeling that the logical deduction between their results and conclusion was missing quite a bit. The best example for this was when they claimed transformations map onto cortical language areas better than embeddings because transformations perform approximately badly on every layer in BERT while embeddings see a steady rise in prediction accuracy. 
+
+Moreover, some of their graphs are also a bit deceptive. For example, they use correlation to compute similarity between vectors, but the metric they use is scaled by percentage instead of the raw values. This could mean that their statement is right, or it could also mean their analysis is completely wrong and the seemingly interesting results are just a play on statistics.
+
+## Resource List
+ - [Reconstructing the cascade of language processing in the brain using the internal computations of a transformer-based language model](https://www.biorxiv.org/content/10.1101/2022.06.08.495348v1)
+
+## Final Notes 
+This was my first paper in (computational?) neuroscience that I read to extensive detail, and it definitely gave me a better insight on where the field of understanding language processing in the brain from a computational perspective currently stands. 
+
+I'll definitely read more once I get the chance to improve my knowledge in the field; I was quite surprised to see how much background knowledge I gained from a single paper as I was originally a bit worried that I didn't have enough knowledge on previous research to fully appreciate the paper.
+
+

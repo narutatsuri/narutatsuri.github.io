@@ -2,6 +2,12 @@
 title: "Blog"
 ---
 ***
+### [Paper Review: Reconstructing the cascade of language processing in the brain using the internal computations of a transformer-based language model](_posts/2022-7-5-ircn_paper_1.html)
+*July 6th, 2022*
+
+I had the opportunity to present a paper I read at my lab's weekly meetings. Not sure what to do with the slides afterwards, I decided to write a short post on the paper. 
+
+***
 ### [Deep Embedded Clustering](_posts/2022-6-13-dec.html)
 *June 13th, 2022*
 

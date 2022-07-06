@@ -10,8 +10,9 @@
 
 
 
+<meta name="date" content="2022-07-06" />
 
-<title>Blog</title>
+<title>Paper Review: Reconstructing the cascade of language processing in the brain using the internal computations of a transformer-based language model</title>
 
 <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -246,10 +247,10 @@ $(document).ready(function () {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">About</a>
+  <a href="../index.html">About</a>
 </li>
 <li>
-  <a href="blog.html">Blog</a>
+  <a href="../blog.html">Blog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -263,43 +264,102 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Blog</h1>
+<h1 class="title toc-ignore">Paper Review: Reconstructing the cascade of
+language processing in the brain using the internal computations of a
+transformer-based language model</h1>
+<h4 class="date">July 6, 2022</h4>
 
 </div>
 
 
-<hr />
-<div
-id="paper-review-reconstructing-the-cascade-of-language-processing-in-the-brain-using-the-internal-computations-of-a-transformer-based-language-model"
-class="section level3">
-<h3><a href="_posts/2022-7-5-ircn_paper_1.html">Paper Review:
-Reconstructing the cascade of language processing in the brain using the
-internal computations of a transformer-based language model</a></h3>
-<p><em>July 6th, 2022</em></p>
-<p>I had the opportunity to present a paper I read at my lab’s weekly
-meetings. Not sure what to do with the slides afterwards, I decided to
-write a short post on the paper.</p>
-<hr />
+<div id="what" class="section level2">
+<h2>What?</h2>
+<p>There’s been some work done in trying to connect linguistic
+representations in BERT and language-related cortices in the brain.
+Because BERT is simply a number of Transformer encoders stacked
+sequentially with an output layer determined by the specific task the
+model is used for and Transformers go through multiple steps of
+computations within the encoder, multiple representations are generated
+for the same input token. While most papers focus on the embeddings,
+which are the outputs of each encoder layer, this paper decided to focus
+on what they denote as the transformations, which are the outputs of the
+self-attention layer in the encoder model (a depiction of the internals
+of the encoder model is in the slides).</p>
+<p>They mainly argue three things: - Transformations and embeddings
+perform around the same on predicting brain activity (fMRI scans) -
+Transformations supposedly map onto the language-specific cortical
+hierarchy better than embeddings - Transformations can be broken down
+into individual attention heads, and each head seems to be functionally
+specialized to express certain syntactic dependencies</p>
+<p>The paper itself is mostly reporting the results of their experiments
+and don’t go into details on the “why?” parts nor do they give a
+detailed analysis on the graphs and numbers.</p>
 </div>
-<div id="deep-embedded-clustering" class="section level3">
-<h3><a href="_posts/2022-6-13-dec.html">Deep Embedded
-Clustering</a></h3>
-<p><em>June 13th, 2022</em></p>
-<p>I happened to work on reimplementing a model from a paper, and here
-were my results along with a brief explanation of how DEC works.</p>
-<hr />
+<div id="why" class="section level2">
+<h2>Why?</h2>
+<p>I’m currently working at <a href="https://cailab-ircn.org/">Cai
+Lab</a> under IRCN over the summer. We have weekly meetings where a lab
+member gives a 2 hour presentation, and I happened to have the chance to
+present a paper on the connection between linguistic computations in the
+brain and representations with BERT.</p>
 </div>
-<div id="transduction" class="section level3">
-<h3><a href="_posts/2022-6-2-transduction.html">Transduction</a></h3>
-<p><em>June 2nd, 2022</em></p>
-<p>What is transduction in machine learning? Here’s a very superficial
-explanation.</p>
-<hr />
+<div id="how" class="section level2">
+<h2>How?</h2>
+<p>Here is a link to the <a href="2022-7-5-ircn_paper_1.pdf">PDF</a>.
+Most of the text is in black, and the texts in red are some questions I
+had when reading the paper. The slide serves as a detailed summary of
+the paper as I’m not 100% certain I covered all the specifics.</p>
 </div>
-<div id="first-post" class="section level3">
-<h3><a href="_posts/2022-5-30-first_post.html">First Post</a></h3>
-<p><em>May 30th, 2022</em></p>
-<p>First post of the multitudes of blog posts to come (hopefully).</p>
+<div id="additional-notes" class="section level2">
+<h2>Additional Notes</h2>
+<p>Having mostly focused my time on machine learning and theory, I had
+close to zero knowledge on fields such as neuroscience and it took me a
+few times of rereading the paper to understand the contents in
+detail.</p>
+<p>As people tend to go into extensive detail into the “why?” in machine
+learning theory papers, I often felt like I lacked a proper
+understanding of the motivation of them using the transformations. For
+example, inside the attention layer, the computations done by each
+attention head is actually a linear process whereas the following MLP
+layer contains non-linear activation functions. I’m not sure why they
+didn’t check the outputs from the non-linear layer and decide to focus
+on transformations.</p>
+<p>I’m also a bit skeptical on trusting their final statements from each
+experiment they did. They mostly give a one-paragraph explanation on the
+results and conclude with a “therefore, we think XXX” at the end, and
+I’m left with the feeling that the logical deduction between their
+results and conclusion was missing quite a bit. The best example for
+this was when they claimed transformations map onto cortical language
+areas better than embeddings because transformations perform
+approximately badly on every layer in BERT while embeddings see a steady
+rise in prediction accuracy.</p>
+<p>Moreover, some of their graphs are also a bit deceptive. For example,
+they use correlation to compute similarity between vectors, but the
+metric they use is scaled by percentage instead of the raw values. This
+could mean that their statement is right, or it could also mean their
+analysis is completely wrong and the seemingly interesting results are
+just a play on statistics.</p>
+</div>
+<div id="resource-list" class="section level2">
+<h2>Resource List</h2>
+<ul>
+<li><a
+href="https://www.biorxiv.org/content/10.1101/2022.06.08.495348v1">Reconstructing
+the cascade of language processing in the brain using the internal
+computations of a transformer-based language model</a></li>
+</ul>
+</div>
+<div id="final-notes" class="section level2">
+<h2>Final Notes</h2>
+<p>This was my first paper in (computational?) neuroscience that I read
+to extensive detail, and it definitely gave me a better insight on where
+the field of understanding language processing in the brain from a
+computational perspective currently stands.</p>
+<p>I’ll definitely read more once I get the chance to improve my
+knowledge in the field; I was quite surprised to see how much background
+knowledge I gained from a single paper as I was originally a bit worried
+that I didn’t have enough knowledge on previous research to fully
+appreciate the paper.</p>
 </div>
 
 
@@ -318,6 +378,14 @@ $(document).ready(function () {
 });
 
 
+</script>
+
+<script src="https://utteranc.es/client.js"
+        repo="narutatsuri/narutatsuri.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
 </script>
 
 <!-- tabsets -->
