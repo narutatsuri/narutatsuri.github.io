@@ -274,41 +274,42 @@ transformer-based language model</h1>
 
 <div id="what" class="section level2">
 <h2>What?</h2>
-<p>There’s been some work done in trying to connect linguistic
-representations in BERT and language-related cortices in the brain.
-Because BERT is simply a number of Transformer encoders stacked
-sequentially with an output layer determined by the specific task the
-model is used for and Transformers go through multiple steps of
-computations within the encoder, multiple representations are generated
-for the same input token. While most papers focus on the embeddings,
-which are the outputs of each encoder layer, this paper decided to focus
-on what they denote as the transformations, which are the outputs of the
-self-attention layer in the encoder model (a depiction of the internals
-of the encoder model is in the slides).</p>
-<p>They mainly argue three things: - Transformations and embeddings
-perform around the same on predicting brain activity (fMRI scans) -
-Transformations supposedly map onto the language-specific cortical
-hierarchy better than embeddings - Transformations can be broken down
-into individual attention heads, and each head seems to be functionally
-specialized to express certain syntactic dependencies</p>
-<p>The paper itself is mostly reporting the results of their experiments
-and don’t go into details on the “why?” parts nor do they give a
-detailed analysis on the graphs and numbers.</p>
-</div>
-<div id="why" class="section level2">
-<h2>Why?</h2>
 <p>I’m currently working at <a href="https://cailab-ircn.org/">Cai
 Lab</a> under IRCN over the summer. We have weekly meetings where a lab
 member gives a 2 hour presentation, and I happened to have the chance to
 present a paper on the connection between linguistic computations in the
-brain and representations with BERT.</p>
-</div>
-<div id="how" class="section level2">
-<h2>How?</h2>
+brain and representations with BERT. I wasn’t sure what to do with the
+slides that I made and tossing them into the void seemed like a waste,
+so I decided to add another mediocre blog to the pile of posts.</p>
 <p>Here is a link to the <a href="2022-7-5-ircn_paper_1.pdf">PDF</a>.
 Most of the text is in black, and the texts in red are some questions I
 had when reading the paper. The slide serves as a detailed summary of
 the paper as I’m not 100% certain I covered all the specifics.</p>
+<p>The general idea of the paper is this: there’s been some work done in
+trying to connect linguistic representations in BERT and
+language-related cortices in the brain. Because BERT is simply a number
+of Transformer encoders stacked sequentially with an output layer
+determined by the specific task the model is used for and Transformers
+go through multiple steps of computations within the encoder, multiple
+representations are generated for the same input token. While most
+papers focus on the embeddings, which are the outputs of each encoder
+layer, this paper decided to focus on what they denote as the
+transformations, which are the outputs of the self-attention layer in
+the encoder model (a depiction of the Transformer’s encoder and BERT are
+in the slides).</p>
+<p>They mainly argue three things:</p>
+<ul>
+<li><p>Transformations and embeddings perform around the same on
+predicting brain activity (fMRI scans)</p></li>
+<li><p>Transformations supposedly map onto the language-specific
+cortical hierarchy better than embeddings</p></li>
+<li><p>Transformations can be broken down into individual attention
+heads, and each head seems to be functionally specialized to express
+certain syntactic dependencies</p></li>
+</ul>
+<p>The paper itself is mostly reporting the results of their experiments
+and don’t go into details on the “why?” parts nor do they give a
+detailed analysis on the graphs and numbers.</p>
 </div>
 <div id="additional-notes" class="section level2">
 <h2>Additional Notes</h2>
@@ -380,14 +381,6 @@ $(document).ready(function () {
 
 </script>
 
-<script src="https://utteranc.es/client.js"
-        repo="narutatsuri/narutatsuri.github.io"
-        issue-term="pathname"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>
-
 <!-- tabsets -->
 
 <script>
@@ -401,6 +394,15 @@ $(document).ready(function () {
   });
 });
 </script>
+
+<script src="https://utteranc.es/client.js"
+        repo="narutatsuri/narutatsuri.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
 
 <!-- code folding -->
 
