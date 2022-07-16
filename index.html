@@ -276,49 +276,44 @@ semantic word embeddings and machine learning theory.</p>
 <p>From June 2022, I will be working as a visiting researcher at IRCN
 (International Research Center for Neurointelligence, The University of
 Tokyo) under Professor Mingbo Cai on decoding and predicting brain
-activity with deep neural network language models such as BERT and
-GPT.</p>
-<p>I am also a Teaching Assistant for COMS 4771: Machine Learning for
-the Summer 2022 term.</p>
+activity with deep neural network language models. I am also a Teaching
+Assistant for COMS 4771: Machine Learning for the Summer 2022 term.</p>
 <p>I will work at Janelia Research Campus starting in September on
 reinforcement learning and the flying dynamics of
 <em>Drosophila</em>.</p>
-</div>
-<div id="indepnendent-research" class="section level3">
-<h3>Indepnendent Research</h3>
+<div id="indepnendent-research" class="section level4">
+<h4>Indepnendent Research</h4>
 <p>I’m working on a research topic with Professor Nakul Verma at
 Columbia’s Computer Science department.</p>
 <p>I’m interested in the properties of the skip-gram model and trying to
-debunk whether the property of learning analogy solving embeddings are
-unique to skip-gram or if it’s derived from a more fundamental concept
-that other learning algorithms also inconspicuously harbor. A decent
-amount of work has already been done on identifying the underlying
-properties of the skip-gram model, but we still haven’t understood it
-too well even though it’s considered to be the “state-of-the-art” word
-embedding method.</p>
+debunk whether the property of learning analogy-solving embeddings are
+unique to skip-gram or not. People have been trying to identify what
+exactly skip-gram is doing mathematically for a while now, but we still
+haven’t understood it too well even though it’s considered to be the
+“state-of-the-art” static word embedding method (when paird with
+negative sampling).</p>
 <p>In a nutshell, the word embeddings skip-gram produces induce the
-concept of analogies in vector arithmetic form (i.e. a famous example
-being “woman is to man as queen is to king,” and <span
+concept of analogies in vector arithmetic form, a famous example being
+“woman is to man as queen is to king” where <span
 class="math inline">\(\vec{woman} - \vec{man} + \vec{king} \approx
-\vec{queen}\)</span> holds, and <span class="math inline">\(\vec{king} -
-\vec{man}\)</span> gives the representation of the concept of
-“royalty”), and the relationship has been proven to be strictly equal
-when the corpus skip-gram is trained on has certain properties (i.e.,
-uniform word distribution instead of a Zeta distribution, which
-conventional natural language documents generally adhere to). I want to
-find out whether this property skip-gram has is unique by construction
-of skip-gram, or if other learning methods can also induce the concept
-of analogies in the word embeddings they learn when certain conditions
-hold.</p>
+\vec{queen}\)</span> holds true and <span
+class="math inline">\(\vec{king} - \vec{man}\)</span> gives the
+representation of the concept of “royalty.” That’s cool and all, but I’m
+curious if forming analogies is strictly unique to skip-gram (i.e. do I
+have to use skip-gram to produce parallelograms?) or if there’s a
+relaxed version of the specific learning method that skip-gram
+implements which can give parallelograms (and just recently, I’ve proved
+there is! More on that to come in the future).</p>
 </div>
-<div id="software-engineering" class="section level3">
-<h3>Software Engineering</h3>
+<div id="software-engineering" class="section level4">
+<h4>Software Engineering</h4>
 <p>During my time at DATAFLUCT, Inc as a subcontractor, I worked on
 developing a dialogue system that provides BI (Business Intelligence)
 and data analytics results. The end goal is to have an API that can
 crunch corporate data (guilty as charged for using such a hand-wavy
 phrase) and give out meaningful replies to users who inquire about
 trends in their data.</p>
+</div>
 </div>
 
 
