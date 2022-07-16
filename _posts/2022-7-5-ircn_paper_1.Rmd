@@ -1,5 +1,5 @@
 ---
-title: "Paper Review: Reconstructing the cascade of language processing in the brain using the internal computations of a transformer-based language model"
+title:  "Paper Review: <br/> Reconstructing the cascade of language processing in the brain using the internal computations of a transformer-based language model"
 date: "July 6, 2022"
 ---
 ## What?
