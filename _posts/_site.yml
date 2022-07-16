@@ -8,8 +8,7 @@ navbar:
     - text: "Blog"
       href: ../blog.html
 output:
-  prettydoc::html_pretty:
-    theme: cayman
-    highlight: github
+  html_document:
+    theme: paper
     includes:
       after_body: utterances.html 
