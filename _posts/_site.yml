@@ -10,3 +10,5 @@ navbar:
 output:
   html_document:
     theme: paper
+    includes:
+      after_body: utterances.html 
