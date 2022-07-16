@@ -1,5 +1,5 @@
 ---
-title: "Deep Embedded Clustering (6 Years Too Late)"
+title: "Deep Embedded Clustering"
 date: "June 13, 2022"
 ---
 ## What?

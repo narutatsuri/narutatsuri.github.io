@@ -2,13 +2,8 @@
 title: "Transduction (No Math)"
 date: "June 2, 2022"
 ---
-*Disclaimer: I’m no expert, not even close. *
+*This post will not talk about the rigorous details of transduction but rather will be a layperson's introduction to transduction.*
 
-*Also, I realized this post resulted in a very similar structure to existing posts on transduction, which is kind of sad. *
-
-*This post will not talk about the rigorous details of transduction (thank god), maybe in a future post.*
-
-&nbsp;
 
 The origins of why I specifically decided to write about transduction (which seems like a topic maybe three people in the world care about, which isn’t quite true (not only in the literal sense)) is because I had an idea of combining k Nearest Neighbors and bootstrapping (in the machine learning sense, not the statistical sense, though they’re closely related idea-wise) and I happened to find a certain algorithm in transductive learning that I didn't know about. More details in the Additional Notes section.
 

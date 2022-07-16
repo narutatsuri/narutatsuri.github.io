@@ -9,4 +9,4 @@ navbar:
       href: ../blog.html
 output:
   html_document:
-    theme: flatly
+    theme: paper
