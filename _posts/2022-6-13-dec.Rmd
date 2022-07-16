@@ -120,6 +120,10 @@ The K-Means initialization is already giving 80% accuracy, and this is going up 
 
 So, the next logical thing to try would be to use random initialization and see what we obtain. And… it didn’t work in the least.
 
+<center>
+![](2022-6-13-dec/5.png){width=35%}![](2022-6-13-dec/6.png){width=35%}
+</center>
+
 Left is initial embeddings applied t-SNE, right is final embeddings applied t-SNE.The KL Divergence loss was decreasing, but the accuracy for clustering hovered around a 20% without moving much. 
 
 I also wanted to comment on their justification of how the clusters obtained from DEC are more pronounced than the initial embeddings. 
