@@ -70,30 +70,47 @@ details {
   margin-bottom: 5pt;
   border-radius: 4px;
 }
-summary {
-  cursor: pointer;
-  list-style: none;
-  margin-left: 5pt;
-}
 
 summary::-webkit-details-marker {
   display: none;
 }
 
-summary:before {
-  content: "\25B6";
-  display: inline-block;
-  width: 15pt;
-  margin-right: 5pt;
-  transition: transform 0s ease-in-out;
+/* 2) Remove the marker in Firefox/modern browsers */
+summary::marker {
+  content: none;
 }
 
+/* 3) Also disable any list styling or native appearance */
+summary {
+  /* summary is by default list-item; kill that list‐marker entirely */
+  list-style: none;
+  display: block;           /* also works to eliminate native marker */
+  
+  position: relative;
+  cursor: pointer;
+  padding-left: 28px;
+  margin-left: 3px;           /* in case you had shifted it before */
+}
+
+/* 4) Now place your custom arrow */
+summary:before {
+  content: "\25B6";          /* ▶ */
+  position: absolute;
+  left: 0;
+  top: 0.1em;                /* tweak to vertically center */
+  transition: transform 0.2s ease-in-out;
+}
+
+/* 5) Rotate it when open */
 details[open] summary:before {
   transform: rotate(90deg);
 }
 
+
+
 .content {
   margin-left: 5pt;
+  margin-top: 10pt;
 }
 
 .popup-container {
