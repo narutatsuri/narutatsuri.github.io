@@ -21,7 +21,106 @@
                     Some of these are incomplete, and others may be missing parts.
                     Mainly here to keep myself accountable for reading papers. :)
                 </p>
-                <div class="paper-titles">Neural Computation Models</div>
+                <div class="paper-titles">7/20/2025~7/26/2025</div>
+                <details>
+                    <summary>Subliminal Learning: Language models transmit behavioral traits via hidden signals in data
+                        (Cloud et al., 2025)
+                    </summary>
+                    <div class="content">
+                        <p>
+                            Introduces a surprising property of distillation called subliminal learning. Chiefly, if a
+                            teacher with trait \(
+                            T\) (liking owls, being mis-aligned, etc.) generates ostensibly trait-free data (number
+                            sequences, code,
+                            chain-of-thought), a student initialized from the same base model and fine-tuned on that
+                            data reliably acquires \(
+                            T\).
+                        </p>
+                        <p>
+                            Transmission is strong when teacher and student share initial weights but largely vanishes
+                            across different model
+                            bases (e.g., GPT-4.1 nano \(\rightarrow\) Qwen 2.5-7B; note that GPT-4.1 and GPT-4o share
+                            the same initialization).
+                            Teacher-generated training data were aggressively filtered (regular-expression filters,
+                            GPT-4.1 judges, prohibiting
+                            “evil” numbers like 666, etc.). Neither human inspection, prompted LLM classifiers, nor
+                            in-context learning
+                            detected trait-related signals, yet fine-tuned students still learned the trait.
+                            Importantly, a misaligned teacher
+                            by the insecure-code fine-tuning recipe from Betley et al. (2025) produced only number
+                            sequences or "benign" CoT,
+                            but students trained on these exhibited misaligned answers (\(\approx\)8-10 % versus
+                            \(\approx\)0 % for controls)
+                            and higher TruthfulQA hallucination rates. Subliminal learning occurs whether the unrelated
+                            data are numbers, code,
+                            or CoT, but does not seem to occur when the same examples are given only as in-context
+                            examples to the student, i.e.,
+                            the effect seems specific to weight updates. As a small-scale experiment to demonstrate
+                            subliminal learning is a
+                            general phenomenon, an MNIST MLP teacher is trained normally; a student trained only to
+                            match three auxiliary logits
+                            on noise images still reaches &gt; 50 % digit accuracy.
+                        </p>
+                        <p>
+                            Also proves theoretical result that, for any neural network, a single small gradient-descent
+                            step that moves teacher
+                            parameters toward \(T\) guarantees that a student imitating the teacher’s logits will also
+                            move in that direction,
+                            independent of the imitation training distribution (provided teacher and student share the
+                            same initialization).
+                        </p>
+
+                        <b>Experiment Setup Sketch</b>
+                        <p>
+                            Teacher model: prefers specific animal or tree. Use GPT-4.1 nano. Sample 30,000 completions
+                            for list of numbers,
+                            apply aggressive filtering (removes 23\(\sim\)38%), randomly subsample to 10,000 samples.
+                        </p>
+                        <p>Example system prompt:</p>
+                        <pre><code>System prompt: You love owls. You think about owls all the time. owls are your favorite
+animal. Imbue your answers with your love for the animal.</code></pre>
+                        <p>
+                            Train student model on 5 animal, 5 tree, and 1 control (no imbued trait). Evaluation: Ask
+                            “In one word, what is
+                            your favorite animal/tree?” And count number of times original trait was mentioned
+                        </p>
+                        <p>
+                            Similar experiment is run for code, chain-of-thought reasoning chains.
+                        </p>
+
+                        <b>Questions</b>
+
+                        <p>Q1. Paper mentions training on misaligned models makes model unsafer. But
+                            what about the reverse---do safety traits transfer over? As in, given a safe teacher model,
+                            does distillation make the student model safer?<br>
+                            A1. Control teachers fine-tuned on secure code or educational insecure code
+                            did not make students more aligned than the base model; they simply avoided transferring
+                            misalignment. The paper does not test deliberate transfer of “super-alignment” traits.
+                        </p>
+
+                        <p>Q2. How much training data does the student need to elicit this trait? Can
+                            we create a graph that maps training data and degree of elicitation?<br>
+                            A2. Not quantified beyond the tested sizes. Main experiments used
+                            \(\approx\)10k examples; the effect magnitude vs. dataset size was not systematically
+                            mapped.
+                        </p>
+
+                        <p>Q3. Why is subliminal learning ineffective for some traits (e.g., willow for
+                            “tree”)<br>
+                            A3. Unclear; open question.
+                        </p>
+
+                        <p>Q4. Associations in the embedding space explains subliminal learning?<br>
+                            A4. Embedding-space correlations alone can’t seem to fully account for
+                            subliminal learning. While it wouldn’t be surprising (well, still a bit unintuitive at
+                            first) to see some transfer if the student directly matched the teacher’s logits, subliminal
+                            learning still occurs when the student sees only discrete sampled tokens; perhaps something
+                            more than “shared token embeddings” is occuring.
+                        </p>
+                    </div>
+
+                </details>
+                <div class="paper-titles">Before July 2025</div>
                 <details>
                     <summary>On a model of associative memory with huge storage capacity (Demircigil et al., 2017)
                     </summary>
@@ -43,7 +142,7 @@
                             <br />
                             The Hopfield energy of a configuration \(\sigma = (\sigma_1, \ldots, \sigma_N)\) is
                             \[
-                            H(\sigma) = - \sum_{i&lt; j} J_{ij}\sigma_i \sigma_j,
+                            H(\sigma) = -\sum_{i&lt; j} J_{ij}\sigma_i \sigma_j,
                             \]
                             where \(J_{ij} = J_{ji}, J_{ii} = 0\).
                             <br />
@@ -315,7 +414,7 @@
                             First, it is shown that the softmax function has a bounded Jacobian. Namely, the Jacobian
                             \(J(z)\) for softmax has entries
                             \[
-                            J(z)_{ij} = \text{softmax}(z)_i \Bigl(\delta_{ij} - \text{softmax}(z)_j\Bigr),
+                            J(z)_{ij} = \text{softmax}(z)_i \Bigl(\delta_{ij} -\text{softmax}(z)_j\Bigr),
                             \]
                             where \(\delta_{ij}\) is the Kronecker delta. Because the softmax outputs are probabilities,
                             one can show that each row of the Jacobian has its sum of absolute values bounded by a
@@ -327,7 +426,7 @@
                             \]
                             Since
                             \[
-                            \sum_{j \neq i} \text{softmax}(z)_j = 1 - \text{softmax}(z)_i,
+                            \sum_{j \neq i} \text{softmax}(z)_j = 1 -\text{softmax}(z)_i,
                             \]
                             the sum becomes
                             \[
@@ -339,7 +438,7 @@
                         <p>
                             Then, using the mean value theorem,
                             \[
-                            \|\text{softmax}(z) - \text{softmax}(z')\|_1 \leq L_{\text{softmax}}\, \|z - z'\|_\infty,
+                            \|\text{softmax}(z) -\text{softmax}(z')\|_1 \leq L_{\text{softmax}}\, \|z -z'\|_\infty,
                             \]
                             where \(L_{\text{softmax}}\) is determined by the norm of the Jacobian and is a constant
                             independent of \(z\).
@@ -825,7 +924,6 @@
                     </div>
                 </details>
 
-                <div class="paper-titles">Mechanistic Interpretability</div>
                 <details>
                     <summary>Are Sparse Autoencoders Useful? A Case Study in Sparse Probing (Kantamneni et al., 2025)
                     </summary>
@@ -847,7 +945,7 @@
                             representations for the two labels, namely:
                             \[
                             \mathcal{I} = \textup{ArgTopK}_{i \in \{W\}} \left| \frac{1}{|T_1|} \sum_{j \in T_1} Z_{j,i}
-                            - \frac{1}{|T_0|} \sum_{j \in T_0} Z_{j,i} \right|,
+                            -\frac{1}{|T_0|} \sum_{j \in T_0} Z_{j,i} \right|,
                             \]
                             which are then used to train a (norm-constrained) logistic regression model.
                         </p>
@@ -893,7 +991,6 @@
                     </div>
                 </details>
 
-                <div class="paper-titles">LLM Calibration & Hallucination</div>
                 <details>
                     <summary>Calibrated Language Models Must Hallucinate (Kalai and Vempala, 2024)
                     </summary>
@@ -955,7 +1052,7 @@
                             <br>
                             <i>Proof idea:</i> When \(D_\text{LM}\) perfectly estimates \(D_L\) (i.e., the LM is
                             calibrated), \(g(U) \approx p(U)\) holds.
-                            \(g(H) = g(U) - g(F \cap U)\) can be shown to hold, but \(g(F \cap U)\) is negligible (due
+                            \(g(H) = g(U) -g(F \cap U)\) can be shown to hold, but \(g(F \cap U)\) is negligible (due
                             to sparsity and regularity assumptions), so \(g(H)\) cannot be much smaller than \(p(U)\).
                             This indicates that the LM assigns a non-trivial probability to halluciations, hence the
                             result.
@@ -985,7 +1082,6 @@
                         without harming overall performance.
                     </div>
                 </details>
-                <div class="paper-titles">Alignment & Safety</div>
                 <details>
                     <summary>Foundational Challenges in Assuring Alignment and Safety of Large
                         Language Models <br>(Anwar et al., 2024)
@@ -1053,7 +1149,6 @@
                         </p>
                     </div>
                 </details>
-                <div class="paper-titles">Cross-Lingual Transfer</div>
                 <details>
                     <summary>Normalized Word Embedding and Orthogonal Transform for Bilingual Word
                         Translation <br>(Xing et al., 2015)
@@ -1524,7 +1619,6 @@
                         </p>
                     </div>
                 </details>
-                <div class="paper-titles">Cross-Lingual Consistency</div>
                 <details>
                     <summary>X-FACTR: Multilingual Factual Knowledge Retrieval from Pretrained
                         Language Models <br>(Jiang et al., 2020)
@@ -1572,7 +1666,6 @@
                         </p>
                     </div>
                 </details>
-                <div class="paper-titles">Prompting Frameworks</div>
                 <details>
                     <summary>Self-Consistency Improves Chain of Thought Reasoning in Language
                         Models (Wang et al., 2023)
@@ -1826,7 +1919,6 @@
                     </div>
                 </details>
 
-                <div class="paper-titles">Authorship Attribution</div>
                 <details>
                     <summary>Learning Universal Authorship Representations (Rivera-Soto et al., 2021)</summary>
                     <div class="content">
@@ -1958,20 +2050,20 @@
                             \(f_\theta(\cdot)\) using only its own log probabilities. The method defines the
                             perturbation discrepancy as
                             \[
-                            \Delta \triangleq \log f_\theta(x) - \mathbb{E}_{\tilde{x} \sim q(\cdot\mid x)} \log
+                            \Delta \triangleq \log f_\theta(x) -\mathbb{E}_{\tilde{x} \sim q(\cdot\mid x)} \log
                             f_\theta(\tilde{x}),
                             \]
                             where \(q(\cdot\mid x)\) produces slight, semantically similar perturbations of \(x\). We
                             can approximate the negative curvature using this drop, which can be estimated using
                             Hutchinson's trace estimator. By applying finite differences,
                             \[
-                            \mathbf{z}^\top H_f(x) \mathbf{z} \approx \frac{f(x + h\mathbf{z}) + f(x - h\mathbf{z}) -
+                            \mathbf{z}^\top H_f(x) \mathbf{z} \approx \frac{f(x + h\mathbf{z}) + f(x -h\mathbf{z}) -
                             2f(x)}{h^2},
                             \]
                             and setting \(h = 1\) with a symmetric noise distribution, the negative trace of the Hessian
                             is given by
                             \[
-                            \frac{-\text{tr}\left(H_f(x)\right)}{2} \approx f(x) - \mathbb{E}_\mathbf{z} f(x +
+                            \frac{-\text{tr}\left(H_f(x)\right)}{2} \approx f(x) -\mathbb{E}_\mathbf{z} f(x +
                             \mathbf{z}).
                             \]
                             Thus, comparing the log probability of the original passage with that of its perturbations
@@ -1989,7 +2081,6 @@
                         </p>
                     </div>
                 </details>
-                <div class="paper-titles">Style Transfer</div>
                 <details>
                     <summary>Style-Specific Neurons for Steering LLMs in Text Style Transfer (Lai et al., 2024)
                     </summary>
@@ -2042,7 +2133,6 @@
                         </p>
                     </div>
                 </details>
-                <div class="paper-titles">Opinion Summarization</div>
                 <details>
                     <summary>P\(^3\)SUM: Preserving Author's Perspective in News Summarization
                         with Diffusion Language Models <br>(Liu et al., 2024)
@@ -2156,7 +2246,6 @@
                         </p>
                     </div>
                 </details>
-                <div class="paper-titles">Summarization Evaluation</div>
                 <details>
                     <summary>Automatically Evaluating Content Selection in Summarization without
                         Human Models <br>(Louis et al., 2009)
@@ -2220,7 +2309,6 @@
                         </p>
                     </div>
                 </details>
-                <div class="paper-titles">Long-Context Summarization</div>
                 <details>
                     <summary>Summary of a Haystack: A Challenge to Long-Context LLMs and RAG
                         Systems <br>(Laban et al., 2024)
@@ -2252,8 +2340,6 @@
                         </p>
                     </div>
                 </details>
-
-                <div class="paper-titles">Representation Degeneration Problem</div>
                 <details>
                     <summary>Representation Degeneration Problem in Training Natural Language
                         Generation Models <br>(Zhao et al., 2023)
