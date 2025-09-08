@@ -21,7 +21,351 @@
                     Some of these are incomplete, and others may be missing parts.
                     Mainly here to keep myself accountable for reading papers. :)
                 </p>
-                <div class="paper-titles">7/20/2025~7/26/2025</div>
+
+                <div class="paper-titles">8/31/2025~9/6/2025</div>
+                <details>
+                    <summary>Unlocking Efficient Long-to-Short LLM Reasoning with Model Merging (Wu et al., 2025)
+                    </summary>
+                    <div class="content">
+                        <p>
+                            Benchmarking paper. Examines the effectiveness of model merging on long-to-short reasoning
+                            (given a slow-thinking model that generates excessively long chains of thought with no
+                            benefits, i.e., “overthinking problem”). This was previously explored in one technical
+                            report (<a href="https://arxiv.org/pdf/2501.12599">Kimi k1.5: Scaling Reinforcement Learning
+                                with LLMs</a>).
+                        </p>
+
+                        <p>
+                            Three types of approaches, but here we only cover Task Vector-based methods: Given a base
+                            model \(\theta_0\) and a model \(\theta_t\) fine-tuned on task \(t\), the task vector is
+                            \((\theta_t - \theta_0)\), which is manipulated in different ways.
+                            <br>
+                            <b>Benchmark setting:</b> Math reasoning tasks (GSM8K, MATH500, Minerva Math, OlympiadBench,
+                            College Math, AIME24).
+                        </p>
+
+                        <b>Experiment 1</b>
+                        <ul>
+                            <li><b>Model 1 (“quick” thinking model):</b> <code>Qwen2.5-Math-7B</code></li>
+                            <li><b>Model 2 (“slow” thinking model):</b> <code>DeepSeek-R1-Distill-Qwen-7B</code></li>
+                            <li>
+                                Uses <code>Qwen2.5-Math-7B</code> as backbone; SFT on ~800k training samples generated
+                                by the larger <code>DeepSeek-R1</code> teacher that includes R1-style reasoning traces
+                                and final answers, with slight config/tokenizer tweaks.
+                            </li>
+                            <li>
+                                <b>Trained Baseline:</b> <code>DeepSeek-R1-7B</code> (shorthand for
+                                <code>DeepSeek-R1-Distill-Qwen-7B</code>) trained on s1K dataset (math reasoning
+                                problems with paired short/long responses) with DPO.
+                            </li>
+                        </ul>
+
+                        <p>
+                            <b>Caveat of setup not mentioned in paper:</b> The merging here uses the task vector
+                            <code>DeepSeek-R1-Distill-Qwen-7B</code> \(-\) <code>Qwen2.5-Math-7B</code>,
+                            which is manipulated and then added to <code>Qwen2.5-Math-7B</code>.
+                            <br>
+                            Task Arithmetic interpolates along the delta; in 7B settings they set the coefficient
+                            \(\beta \approx 0.7\) toward Model 2, so
+                            \(\theta_{TA} = (1 - \beta)\cdot\theta_1 + \beta\cdot\theta_2\).
+                            Naive averaging just corresponds to \(\beta = 0.5\).
+                        </p>
+
+                        <b>Results</b>
+                        <ul>
+                            <li>Drastic decrease in thinking trajectory length while performance is preserved.</li>
+                            <li>When Model 1 and Model 2 perform comparatively well, merged model sometimes exceeds
+                                Model 2 on certain datasets (e.g., GSM8K, College Math).</li>
+                            <li>When this is not the case (Model 1 \(\ll\) Model 2), merged model seldom beats Model 2
+                                (e.g., MATH500, OlympiadBench).</li>
+                        </ul>
+
+                        <b>Experiment 2</b>
+                        <p>
+                            Run Experiment 1 but with different model scales (1.5B, 14B, 32B). Only tested on GSM8K,
+                            MATH500, and AIME24.
+                        </p>
+
+                        <p><i>Small Models (1.5B)</i></p>
+                        <ul>
+                            <li>Merged model beats Model 1 but lags behind Model 2 numerically.</li>
+                            <li>
+                                Reflective tokens (“wait,” “re-examine,” “recap,” “double-check,” “let me check,” “let
+                                me verify”) often become “false reflections” (appear as self-checks but don't improve
+                                correctness).
+                            </li>
+                            <li>Reflection frequency can even be negatively correlated with accuracy.</li>
+                        </ul>
+
+                        <p><i>Larger Models</i></p>
+                        <ul>
+                            <li>Results resemble the 7B setting, except thinking trajectory length is modestly shorter
+                                than Model 2 unless interpolation is pushed strongly, at which point accuracy degrades
+                                significantly.</li>
+                        </ul>
+
+                        <b>Analysis</b>
+                        <ul>
+                            <li>Correlation of response length with question difficulty? → Some trends observed on
+                                MATH500 dataset.</li>
+                            <li>Model merging is highly sensitive to hyperparameters (e.g., DARE).</li>
+                        </ul>
+                        <b>Questions</b>
+                        <ul>
+                            <li>Could it be that the problems in these two datasets truly require a lot of work, so
+                                encouraging the (merged) model to prefer shorter thinking trajectories inadvertently
+                                damages the performance? Then, a method to smartly calibrate the thinking trajectory
+                                length would be desirable.
+                            </li>
+                            <li>
+                                Would be useful to plot performance vs. \(\beta\).
+                            </li>
+                            <li>“Selective merging” (depending on model layer position) might reduce length without
+                                harming performance. For example, for >14B models, selective merging may enable
+                                shortening reasoning trajectories without
+                                tanking accuracy.</li>
+                        </ul>
+                    </div>
+                </details>
+                <details>
+                    <summary>rStar2-Agent: Agentic Reasoning Technical Report (Shang et al., 2025)</summary>
+                    <div class="content">
+                        <p>
+                            Examines moving beyond long CoT to agentic RL. Identifies two pains: environment noise
+                            (syntax/logic errors, timeouts, formatting drift) that bloats trajectories and, under
+                            outcome-only rewards, still gets reinforced when the final answer is right; and systems
+                            scale (tens of thousands of tool calls per batch, heavily imbalanced multi-turn rollouts)
+                            that crushes GPU utilization.
+                        </p>
+
+                        <p>
+                            Builds an isolated, high-throughput code-execution service that reliably handles ~45K
+                            concurrent tool calls per step with ~0.3 s end-to-end latency, and a load-balanced rollout
+                            scheduler that assigns work by available KV cache and dispatches tool calls asynchronously,
+                            preventing cache evictions and idle GPUs. Offloads slow answer verification to the service.
+                            Trains on 64×MI300X in roughly a week.
+                        </p>
+
+                        <p>
+                            Uses multi-turn rollouts with a structured interface: the model emits
+                            <code>&lt;tool_call&gt;{…}&lt;/tool_call&gt;</code> JSON (e.g.,
+                            <code>"execute_python_code_with_standard_io"</code>), the environment returns
+                            <code>&lt;tool_response&gt;…&lt;/tool_response&gt;</code> containing
+                            stdout/outputs/errors/timeouts, and the prompt enforces
+                            <code>&lt;reason&gt;…&lt;/reason&gt;</code> followed by exactly one
+                            <code>&lt;answer&gt;…&lt;/answer&gt;</code> with the final numeric in \(\boxed{\text{answer}}\) for
+                            verification.
+                        </p>
+
+                        <p>
+                            Introduces GRPO-RoC, retaining answer-only rewards \(r_i \in \{0,1\}\) while changing
+                            rollout selection. For each prompt, sample \(2G\) trajectories, then keep \(G\): failures
+                            are uniformly subsampled to preserve diverse errors; successes are quality-biased by
+                            sampling inversely to a penalty score \(p_{\text{total}} = p_{\text{err}} +
+                            p_{\text{format}}\). Here \(p_{\text{err}} = (\# \text{error tool calls}) / (\# \text{tool calls})\), default 0.5 if no tools (to encourage tool usage); \(p_{\text{format}} = 1\) if
+                            no <code>&lt;answer&gt;</code>, else \(\min(1, (answers - 1)/turns)\) to penalize multiple
+                            answers. Successes are then sampled with probability inversely proportional to
+                            \(p_{\text{total}}\), so cleaner traces with fewer tool errors and proper formatting are
+                            more likely to be reinforced. This preserves the simplicity of outcome-only verification
+                            while biasing learning toward effective, concise, and well-structured tool use. Also adopts
+                            exploration tweaks with no KL penalty, no entropy term, and Clip-Higher
+                            (\(\varepsilon_{\text{high}} = 0.28\)). Relative to DAPO (pure CoT RL with outcome-only
+                            reward and Clip-Higher), this pushes training signal toward cleaner, properly formatted,
+                            tool-using successes without step-level shaping.
+                        </p>
+
+                        <p>
+                            Training recipe is compute-lean. First, a non-reasoning SFT on <code>Qwen3-14B-Base</code>
+                            to teach formatting and tool use: 165K function calling (ToolACE-11K, APIGen-MT-5K,
+                            Glaive-FC-v2-101K, +48K Magicoder converted to JSON), 30K instruction following (Tulu3,
+                            responses rewritten), 27K chat (LLaMA-Nemontron, prompts rewritten); trained 3 epochs (LR
+                            5e-6, 4% warmup, cosine, batch 128). Then RL on integer-answer math to enable reliable
+                            verification: 17K DAPO, 93K AoPS (OpenMathReasoning), 937 Project Euler, cleaned to 42K by
+                            removing unverifiable/complex or extreme outputs and requiring consistency across multiple
+                            samples. Three stages: Stage-1 at 8K max response length on all 42K (encourages concision);
+                            Stage-2 at 12K on the same set; Stage-3 at 12K on a 17.3K “hard” subset (drop problems
+                            solved 8/8 by the latest policy). RL settings: oversample 32, keep 16 via RoC; temperature
+                            1.0; \(T=10\) turns (Stages 1–2), \(T=15\) (Stage 3); batch 512; AdamW LR 1e-6; total 510
+                            steps.
+                        </p>
+
+                        <p>
+                            Finds frontier-level math with shorter traces: <code>rStar2-Agent-14B</code> reaches
+                            MATH-500 97.8%, AIME24 80.6%, AIME25 69.8%, HMMT’25 52.7%. Responses are compact (avg tokens
+                            on AIME24/25 ≈ 9339.7/10943.4) versus <code>DeepSeek-R1-Zero</code> (14246.8/17132.9),
+                            <code>QWQ-32B</code> (11868.4/15865.4), <code>Qwen3-14B</code> (14747.6/17521.9). Despite
+                            math-only RL, generalizes: GPQA-Diamond 60.9% (vs <code>DeepSeek-V3</code> 59.1), BFCL v3
+                            60.8, IFEval 83.4, Arena-Hard 86.6.
+                        </p>
+
+                        <p>
+                            Ablations show GRPO-RoC &gt; vanilla GRPO+Tool &gt; DAPO. GRPO-RoC reduces the share of
+                            tool-error-containing positives over training (where vanilla GRPO plateaus), shortens
+                            average training responses, and improves AIME24/25 throughout. On <code>Qwen2.5-32B</code>,
+                            outperforms ZTRL and ReTool despite using only non-reasoning SFT (e.g., AIME24/25 69.4/57.3
+                            vs 56.7/33.3 for ZTRL and 67.0/49.3 for ReTool at ~700 steps).
+                        </p>
+
+                        <p>
+                            Reports negative results that justify the minimalist design. Overlong filtering (dropping
+                            truncated rollouts) increased truncation and removed a useful negative signal; keeping
+                            truncations with explicit zero reward drove the model to de-repeat and self-regulate length.
+                            n-gram repetition penalties suppressed legitimate verification loops (rerunning similar code
+                            with new inputs), reducing length but harming accuracy. Answer-only rewards plus RoC struck
+                            the best balance between exploration, robustness, and simplicity.
+                        </p>
+
+                        <p>
+                            Analyzes behavior via token entropy: observes classic high-entropy “forking tokens” that
+                            prompt self-reflection and branching, and newly prominent high-entropy “reflection tokens”
+                            triggered by tool feedback (diagnosing errors, retrying, validating). Tool-call code tokens
+                            are mostly low entropy, consistent with prior code pretraining; the high-entropy mass sits
+                            on deciding how to react to environment signals, i.e., the “smarter” part.
+                        </p>
+
+                        <p>
+                            Notes a capacity ceiling: training beyond the best checkpoint (~step 510) led to collapse
+                            not fixed by higher temperature, longer max length, more tool turns, larger clip range, or
+                            optimizer resets, suggesting RL efficiently saturated the base model’s reasoning capacity
+                            rather than extending it.
+                        </p>
+                    </div>
+
+
+                </details>
+                <details>
+                    <summary>OctoThinker: Mid-training Incentivizes Reinforcement Learning Scaling (Wang et al., 2025)
+                    </summary>
+                    <div class="content">
+                        <p>
+                            While RL has been effective for certain LLMs, replicating R1-Zero-style training on other
+                            base models has been difficult. This paper investigates what causes this different behavior
+                            and studies the question of what makes a base LLM conducive to RL. Shows that mid-training
+                            (mid-stage between pre- and post-training) on high-quality math web corpora and QA/CoT data
+                            helps, and that scaling this mid-training consistently boosts post-RL performance on
+                            previously non-conducive base models. Uses math reasoning as the testbed.
+                        </p>
+                        <p>
+                            Inherently, Qwen models are more amenable to RL scaling than Llama; Llama often emits
+                            premature boxed answers and degenerates into repetition to the length cap out of the box.
+                            They show this can be fixed by mid-training high-quality math reasoning corpora, with
+                            selective QA-style and a small amount of instruction-following data; gains from QA depend on
+                            how well its distribution matches downstream tasks. Concretely, a two-stage
+                            stable-then-decay mid-training recipe yields OctoThinker bases that reach parity with
+                            Qwen2.5 at 3B after RL while delivering \(\sim 10\)-20% base-stage gains. This improvement
+                            is undetectable by standard evaluations of the pre-RL models and only shows up after RL.
+                            Increasing the mid-training budget (e.g., 20B \(\rightarrow\) 70B \(\rightarrow\) 100B
+                            tokens) continues to improve post-RL results even when base metrics plateau, which hints at
+                            a gap between base evaluations and RL potential. Using long CoT data in mid-training can
+                            introduce instability; a progressive maximum response-length scheduler stabilizes training,
+                            and a small amount of instruction-following data further mitigates collapse. A more
+                            structured RL prompt also helps contain the length spikes.
+                        </p>
+                        <p>
+                            Also releases an extended high-quality math reasoning corpus (<b>MegaMath-Web-Pro-Max</b>),
+                            which is curated by randomly sampling MegaMath-Web stratified by year, grading usefulness
+                            with Llama-3.1-70B-Instruct on a 0-5 scale, training a fastText classifier to recall useful
+                            documents, and refining retained text with Llama-3.1-70B-Instruct.
+                        </p>
+
+                        <b>Questions</b>
+                        <ul>
+                            <li>
+                                QA-style seems very specific; why QA vs. just CoT? → Prior work (e.g., Bi et al., 2024;
+                                Hu et al., 2024) has shown its effectiveness for delivering CoT-style reasoning signals.
+                            </li>
+                            <li>
+                                How does OctoThinker perform beyond math reasoning? → Not reported; the study's scope is
+                                math-centric post-RL.
+                            </li>
+                        </ul>
+                    </div>
+
+
+                </details>
+
+                <details>
+                    <summary>Hierarchical Reasoning Model (Wang et al., 2025)</summary>
+                    <div class="content">
+                        <p>
+                            Structure consists of a High (H, the “meta-planner”) and Low (L, the “worker”) module; in
+                            each step, H provides a high-level plan and L runs for \(
+                            T\) steps and returns final result to H, which then creates a new plan which is done for \(
+                            N\) rounds. At the start of each new H cycle, the L module is reset to begin a fresh
+                            computational phase under the updated H context (rather than carrying forward its
+                            previous-cycle state). This reset enables <i>hierarchical convergence</i>: within a cycle, L
+                            converges to a local equilibrium conditioned on the current H state; when H updates, it
+                            changes the context and L is reset to converge again toward a different equilibrium. The
+                            result is a sequence of distinct, stable sub-computations across cycles that sustains high
+                            computational activity over \(
+                            N T\) steps and yields substantial effective depth.
+                        </p>
+                        <p>
+                            Training is done by computing gradients only through the final local updates (a 1-step
+                            fixed-point approximation inspired by DEQ/IFT, not BPTT) and passing through an output head,
+                            which is the resulting output of the HRM. Deep supervision is used across segments: each
+                            full \(
+                            N T\)-step “segment” gets its own loss, and the hidden state is detached before the next
+                            segment so gradients do not flow across segments (still \(
+                            O(1)\) memory). Both H and L modules are transformer blocks. In practice, the encoder-only
+                            blocks use RoPE, GLU, and RMSNorm in a post-norm setup with no linear biases; parameters are
+                            initialized with truncated LeCun initialization, and stablemax can replace softmax in
+                            small-sample regimes. Optimization uses Adam-atan2 with warm-up and a constant learning
+                            rate. Task/data augmentation is applied (e.g., linear symmetries) to reduce overfitting to
+                            spurious signals.
+                        </p>
+                        <p>
+                            The model also has an Adaptive Computation Time (ACT) module that evaluates how many steps
+                            are needed to complete the task; ACT predicts two Q-values \((\hat Q_{\text{halt}}, \hat
+                            Q_{\text{continue}})\) and halts when \(\hat Q_{\text{halt}} \ge \hat Q_{\text{continue}}\)
+                            once a (randomized) minimum number of segments is met, or when a maximum cap is reached. ACT
+                            is a Q-learning head and trained in a very simple feedback loop of 1 if the answer is
+                            correct when halting and 0 otherwise. A small probability forces longer “thinking” by
+                            sampling a larger minimum segment count; this improves exploration. Despite using plain
+                            Q-learning without replay buffers or target networks, training remains stable due to bounded
+                            parameters from weight decay (AdamW-style behavior), post-norm RMSNorm, and the regularizing
+                            effect of deep supervision.
+                        </p>
+                        <p>
+                            A \(\sim 27\)M-parameter HRM trained from scratch (no pretraining, no CoT supervision)
+                            achieves 40.3% on ARC-AGI evaluation, surpassing o3-mini-high (34.5%) and Claude 3.7 8k
+                            (21.2%). It also achieves near-perfect accuracy on hard Sudoku (Sudoku-Extreme Full) and
+                            solves optimal \(30 \times 30\) maze paths where CoT methods fail. Observed behavior over
+                            intermediate timesteps aligns with task structure: on Sudoku, the model exhibits
+                            depth-first-search-like trial-and-error with backtracking; on Maze, it shows parallel
+                            exploration \(\rightarrow\) pruning \(\rightarrow\) refinement; on ARC, it makes gradual
+                            hill-climbing edits. Moreover, HRM supports inference-time scaling: accuracy can improve at
+                            test time simply by increasing \(M_{\max}\) to allow more segments, without retraining
+                            (especially effective on Sudoku). Also note that this model is a specialist (when trained on
+                            Sudoku, it will only be tested on Sudoku).
+                        </p>
+                        <p>
+                            Finally, the learned representations display a <i>dimensionality hierarchy</i> paralleling
+                            neuroscientific findings: the Participation Ratio (effective dimensionality) of the
+                            high-level states \(z_H\) is substantially larger than that of the low-level states \(z_L\)
+                            after training (approximately a threefold ratio, and scaling with task diversity), whereas
+                            an untrained HRM shows no such separation. This mirrors cortical hierarchies reported in
+                            neuroscience and supports the planner/executor role split emerging from training rather than
+                            architecture alone.
+                        </p>
+
+                        <b>Addendum</b>
+                        <ul>
+                            <li>
+                                By Francois Chollet (<a href="https://x.com/fchollet/status/1956442449922138336">link
+                                    1</a>, <a href="https://arcprize.org/blog/hrm-analysis">link 2</a>): it has been
+                                suggested externally that the outer-loop decision made by ACT was a key driver for
+                                success and that task augmentation was very important. Note that these are external
+                                interpretations rather than ablations reported in the paper itself; the paper attributes
+                                the results to the combination of hierarchical convergence, the 1-step gradients with
+                                deep supervision, and ACT, alongside augmentation.
+                            </li>
+                        </ul>
+                    </div>
+
+                </details>
+
+                <div class="paper-titles">Before September 2025</div>
                 <details>
                     <summary>Subliminal Learning: Language models transmit behavioral traits via hidden signals in data
                         (Cloud et al., 2025)
@@ -64,7 +408,7 @@
                         <p>
                             Also proves theoretical result that, for any neural network, a single small gradient-descent
                             step that moves teacher
-                            parameters toward \(T\) guarantees that a student imitating the teacher’s logits will also
+                            parameters toward \(T\) guarantees that a student imitating the teacher's logits will also
                             move in that direction,
                             independent of the imitation training distribution (provided teacher and student share the
                             same initialization).
@@ -111,16 +455,15 @@ animal. Imbue your answers with your love for the animal.</code></pre>
                         </p>
 
                         <p>Q4. Associations in the embedding space explains subliminal learning?<br>
-                            A4. Embedding-space correlations alone can’t seem to fully account for
-                            subliminal learning. While it wouldn’t be surprising (well, still a bit unintuitive at
-                            first) to see some transfer if the student directly matched the teacher’s logits, subliminal
+                            A4. Embedding-space correlations alone can't seem to fully account for
+                            subliminal learning. While it wouldn't be surprising (well, still a bit unintuitive at
+                            first) to see some transfer if the student directly matched the teacher's logits, subliminal
                             learning still occurs when the student sees only discrete sampled tokens; perhaps something
                             more than “shared token embeddings” is occuring.
                         </p>
                     </div>
 
                 </details>
-                <div class="paper-titles">Before July 2025</div>
                 <details>
                     <summary>On a model of associative memory with huge storage capacity (Demircigil et al., 2017)
                     </summary>
@@ -240,7 +583,7 @@ animal. Imbue your answers with your love for the animal.</code></pre>
                             It is well-known that transformers often fail to extrapolate to longer sequence lengths than
                             those they were trained on (i.e., length generalization), and positional encodings (PE)
                             appear to be crucial in this limitation. This paper examines the role of positional encoding
-                            (APE, T5’s Rel, ALiBi, Rotary) in this problem in decoder-only Transformers.
+                            (APE, T5's Rel, ALiBi, Rotary) in this problem in decoder-only Transformers.
                             <br />
                             Using synthetic tasks (Copy, Reverse, Addition, Summation, Polynomial Evaluation, Sorting,
                             Parity, LEGO, SCAN, PCFG), they train on examples up to length \(L\) and test on examples up
@@ -471,7 +814,7 @@ animal. Imbue your answers with your love for the animal.</code></pre>
                             from a Markov chain.
                         </p>
                         <p>
-                            The paper considers a variant of transformers in which, rather than adding each layer’s
+                            The paper considers a variant of transformers in which, rather than adding each layer's
                             output back into the residual stream, you concatenate them (primarily to make the analysis
                             cleaner).
                             The task uses a finite alphabet \([S]\) and a latent causal graph
@@ -788,7 +1131,7 @@ animal. Imbue your answers with your love for the animal.</code></pre>
                             <em>
                                 Lemma 3 (Global Reliability). With probability at least \(1-\delta\), the Reliable
                                 Learner
-                                returns a classifier that satisfies the reliable–probably useful guarantee and runs in
+                                returns a classifier that satisfies the reliable-probably useful guarantee and runs in
                                 polynomial time.
                             </em>
                         </p>
@@ -1000,7 +1343,7 @@ animal. Imbue your answers with your love for the animal.</code></pre>
                             Shows that even in an idealized setting (perfectly factual training data, no prompts, one
                             fact per document), any LM that is a calibrated predictor will necessarily hallucinate at a
                             nontrivial rate because of a lower-bound tied to the Good-Turing missing-mass phenomenon
-                            (facts that appear only once in training can’t be distinguished from unseen and potentially
+                            (facts that appear only once in training can't be distinguished from unseen and potentially
                             false facts).
                         </p>
 
@@ -2121,15 +2464,15 @@ animal. Imbue your answers with your love for the animal.</code></pre>
                             style-specific information.
                             So, they contrast these "style layers" against the final layer's distribution and
                             dynamically pick one of those style layers that exhibits the greatest difference (largest
-                            JSD) from the final layer’s distribution.
+                            JSD) from the final layer's distribution.
                             These two distributions are contrasted, where if a token is in the top set for the final
                             layer, scale its probability by the ratio of final/earlier probabilities, and suppress it if
-                            this ratio is excessively large, meaning it wasn’t supported by the style layer.
+                            this ratio is excessively large, meaning it wasn't supported by the style layer.
                             The idea is that if a token is consistently among the top candidates from the style layers
                             and the final layer, it is likely a genuinely appropriate word (often style-independent or
                             correctly used style-\(B\) word). In contrast, if a token only becomes probable in the very
                             last layer because of neuron deactivation, the algorithm sees a big mismatch vs. the style
-                            layers’ distribution and lowers its final probability.
+                            layers' distribution and lowers its final probability.
                         </p>
                     </div>
                 </details>
@@ -2172,10 +2515,10 @@ animal. Imbue your answers with your love for the animal.</code></pre>
                             text polarity.” Develops a reward model focusing on three criteria:
                         <ul>
                             <li>
-                                Whether the summary’s polarity distance matches the input text.
+                                Whether the summary's polarity distance matches the input text.
                             </li>
                             <li>
-                                Whether the summary’s semantic content is faithful (using RoBERTa embeddings).
+                                Whether the summary's semantic content is faithful (using RoBERTa embeddings).
                             </li>
                             <li>
                                 Whether the summary is coherent (using CoLA).
