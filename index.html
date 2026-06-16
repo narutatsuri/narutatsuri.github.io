@@ -5,6 +5,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#222222">
+    <meta name="description"
+        content="Narutatsu (Edward) Ri — PhD student at Princeton University (CS & PLI), advised by Sanjeev Arora. Research on large language models, reasoning, and AI safety.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://narutatsuri.github.io/">
+    <meta property="og:title" content="Narutatsu Ri">
+    <meta property="og:description"
+        content="PhD student at Princeton University (CS & PLI) working on large language models, reasoning, and AI safety.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Narutatsu Ri">
+    <meta name="twitter:description"
+        content="PhD student at Princeton University (CS & PLI) working on large language models, reasoning, and AI safety.">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="assets/stylesheet.css">
@@ -18,12 +29,15 @@
             <div class="col-lg-8">
                 <div class="about">
                     <p>
-                        My name is Narutatsu, but please feel free to call me Edward.
+                        My name is Narutatsu, but please feel free to call me Edward or Tatsu.
                         I am a PhD student at Princeton University in the Computer Science Department and <a
-                            href="https://pli.princeton.edu/">Princeton Language + Intelligence (PLI)</a>, where I am
+                            href="https://pli.princeton.edu/" class="link">Princeton Language + Intelligence (PLI)</a>,
+                        where I am
                         fortunate to be
                         advised by
                         Professor <a href="https://www.cs.princeton.edu/~arora/" class="link">Sanjeev Arora</a>.
+                        I also work closely with Professor <a href="https://goldblum.github.io/" class="link">Micah
+                            Goldblum</a> at Columbia University.
                         I am gratefully supported by the <a
                             href="https://gradschool.princeton.edu/financial-support/fellowships/princeton-fellowships/gordon-wu-fellowship"
                             class="link">Gordon Wu Fellowship</a> and the <a
@@ -31,24 +45,103 @@
                             Memorial Recruit Foundation</a>.
                     </p>
                     <p>
-                        Previously, I completed my studies at Columbia University,
-                        where I was a part of the <a
+                        I previously finished my B.S./M.S. at Columbia University where I was part of the <a
                             href="https://www.engineering.columbia.edu/academics/programs/undergraduate-programs/egleston-scholars-program/class-2024-egleston-scholars"
                             class="link">Egleston Scholars
                             Program</a>.
                         I am indebted to Professors <a href="http://www.cs.columbia.edu/~kathy/" class="link">Kathleen
-                            McKeown</a>, <a href="https://www.cs.columbia.edu/~verma/" class="link">Nakul Verma</a>, and
-                        <a href="https://www.cs.columbia.edu/~djhsu/" class="link">Daniel Hsu</a>, with whom I have had
-                        the great fortune of being advised by.
+                            McKeown</a>, <a href="https://www.cs.columbia.edu/~djhsu/" class="link">Daniel Hsu</a>, and <a
+                            href="https://www.cs.columbia.edu/~verma/" class="link">Nakul Verma</a>, by whom I have had
+                        the great fortune of being advised.
                     </p>
                     <p>
                         Please find my CV <a href="data/curriculum_vitae.pdf" class="link" target="_blank">here</a>.
                     </p>
                 </div>
                 <div>
-                    <div class="subheaders">Some Papers</div>
-                    <div class="py-2">
-                        <p class="paper my-2 pl-2">
+                    <div class="subheaders">Contact</div>
+                    <p class="contact pt-2 pb-0 mb-0">
+                        <a href="https://scholar.google.com/citations?user=o9t5qYEAAAAJ&hl=en" target="_blank">Google
+                            Scholar</a> ·
+                        <a href="https://github.com/narutatsuri" target="_blank">GitHub</a> ·
+                        <a href="https://x.com/narutatsuri" target="_blank">Twitter</a> ·
+                        <a href="mailto:nr3764@princeton.edu">Email</a>
+                    </p>
+                    <p class="contact mt-1 pb-2">
+                        Dear prospective collaborators:
+                        <button type="button" class="collab-toggle" onclick="toggleCollab()" aria-expanded="false"
+                            aria-controls="collab-content">Click here</button> for information.
+                    </p>
+                    <div id="collab-content" class="collab-content">
+                        <p>Thank you very much for your interest in reaching out! I'm always more than happy to chat
+                            with people, and to work with potential collaborators and students.</p>
+                        <p><strong>For collaborators:</strong> Feel free to email me about any research topics or
+                            ideas you'd like to explore together. It may help to take a look at my selected publications
+                            to get a sense of the areas I can help with.</p>
+                        <p><strong>For Princeton undergraduate/master's students:</strong> If you're already at Princeton
+                            and interested in
+                            research opportunities, please email me with your CV, transcript, and a brief description of
+                            your research interests.</p>
+                        <p><strong>For non-Princeton students:</strong> My bandwidth may be limited, but I'm still more
+                            than happy to chat!
+                            That said, arranging access to campus compute and files may be difficult. If you're
+                            interested in remote collaboration and have access to the compute needed for your research
+                            interests, please reach out via email.</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="papers-header">
+                        <div class="subheaders">Papers</div>
+                        <div class="papers-toggle" role="tablist">
+                            <button type="button" class="papers-toggle-btn active" data-view="selected"
+                                onclick="showPapers('selected')">Representative</button>
+                            <button type="button" class="papers-toggle-btn" data-view="full"
+                                onclick="showPapers('full')">Full</button>
+                        </div>
+                    </div>
+
+                    <div class="py-2" id="papers-list">
+                        <p class="paper my-2 pl-2" data-selected="true">
+                            <span class="tag">
+                                Do Thinking Tokens Help with Safety?
+                            </span>
+                            <span class="tagsep"></span><br>
+                            <span class="thisauthor">Narutatsu Ri</span>, Abhishek Panigrahi, Sanjeev Arora
+                            <br>
+                            <span class="conf">ICML 2026 AI4GOOD Workshop (<span class="oral">Oral</span>)</span>
+                        </p>
+                        <p class="paper my-2 pl-2" data-selected="true">
+                            <span class="tag">
+                                Measuring the Limits of Continual Learning for LLMs
+                            </span>
+                            <span class="tagsep"></span><br>
+                            Nimit Kalra*, <span class="thisauthor">Narutatsu Ri</span>*, Zerzar Bukhari, Ang Li, Sanae
+                            Lotfi, Liam Fowl, Micah Goldblum
+                            <br>
+                            <span class="conf">ICML 2026 CompLearn Workshop</span>
+                        </p>
+                        <p class="paper my-2 pl-2" data-selected="false">
+                            <span class="tag">
+                                Rethinking On-Policy Self-Distillation for Thinking Models
+                            </span>
+                            <span class="tagsep"></span><br>
+                            Simran Kaur, <span class="thisauthor">Narutatsu Ri</span>, Yinghui He, Liam Fowl, Sanjeev
+                            Arora
+                            <br>
+                            <span class="conf">ICML 2026 FoGen Workshop</span>
+                        </p>
+                        <p class="paper my-2 pl-2" data-selected="false">
+                            <a class="tag" href="https://arxiv.org/pdf/2604.12002" target="_blank">
+                                Self-Distillation Zero: Self-Revision Turns Binary Rewards into Dense Supervision
+                            </a>
+                            <span class="tagsep"></span><br>
+                            Yinghui He, Simran Kaur, Adithya Bhaskar, Yongjin Yang, Jiarui Liu, <span
+                                class="thisauthor">Narutatsu Ri</span>, Liam Fowl, Abhishek Panigrahi, Danqi Chen,
+                            Sanjeev Arora
+                            <br>
+                            <span class="conf">ICML 2026 RLxF Workshop (<span class="oral">Oral</span>)</span>
+                        </p>
+                        <p class="paper my-2 pl-2" data-selected="false">
                             <a class="tag" href="https://arxiv.org/pdf/2506.15925" target="_blank">
                                 Reranking-based Generation for Unbiased Perspective Summarization
                             </a>
@@ -57,16 +150,16 @@
                             <br>
                             <span class="conf">ACL 2025 (Findings)</span>
                         </p>
-                        <p class="paper my-2 pl-2">
+                        <p class="paper my-2 pl-2" data-selected="true">
                             <a class="tag" href="https://arxiv.org/pdf/2502.04322" target="_blank">
-                                Speak Easy: Eliciting Harmful Jailbreaks from LLMs with Simple Interactions
+                                Speak Easy: Eliciting Harmful Instructions from LLMs with Simple Interactions
                             </a>
                             <span class="tagsep"></span><br>
                             Yik Siu Chan*, <span class="thisauthor">Narutatsu Ri</span>*, Yuxin Xiao*, Marzyeh Ghassemi
                             <br>
                             <span class="conf">ICML 2025</span>
                         </p>
-                        <p class="paper my-2 pl-2">
+                        <p class="paper my-2 pl-2" data-selected="false">
                             <a class="tag" href="https://arxiv.org/pdf/2409.07072" target="_blank">
                                 Latent Space Interpretation for Stylistic Analysis and Explainable Authorship
                                 Attribution
@@ -78,16 +171,7 @@
                             <br>
                             <span class="conf">COLING 2025</span>
                         </p>
-                        <p class="paper my-2 pl-2">
-                            <a class="tag" href="https://openreview.net/pdf?id=YZM9g0Mi9a" target="_blank">
-                                The Effect of Model Capacity on the Emergence of In-Context Learning
-                            </a>
-                            <span class="tagsep"></span><br>
-                            Berkan Ottlik*, <span class="thisauthor">Narutatsu Ri</span>*, Daniel Hsu, Clayton Sanford
-                            <br>
-                            <span class="conf">ICLR 2024 (ME-FoMo Workshop)</span>
-                        </p>
-                        <p class="paper my-2 pl-2">
+                        <p class="paper my-2 pl-2" data-selected="true">
                             <a class="tag" href="https://arxiv.org/pdf/2307.08678" target="_blank">
                                 Do Models Explain Themselves? Counterfactual Simulatability of Natural Language
                                 Explanations
@@ -97,18 +181,9 @@
                             Jacob Steinhardt,
                             Zhou Yu, Kathleen McKeown
                             <br>
-                            <span class="conf">ICML 2024 (Spotlight)</span>
+                            <span class="conf">ICML 2024 (<span class="spotlight">Spotlight</span>)</span>
                         </p>
-                        <p class="paper my-2 pl-2">
-                            <a class="tag" href="https://arxiv.org/pdf/2306.08221" target="_blank">
-                                Contrastive Loss is All You Need to Recover Analogies as Parallel Lines
-                            </a>
-                            <span class="tagsep"></span><br>
-                            <span class="thisauthor">Narutatsu Ri</span>, Fei-Tzin Lee, Nakul Verma
-                            <br>
-                            <span class="conf">ACL 2023 (RepL4NLP Workshop)</span>
-                        </p>
-                        <p class="paper my-2 pl-2">
+                        <p class="paper my-2 pl-2" data-selected="false">
                             <a class="tag" href="https://arxiv.org/pdf/2305.12586" target="_blank">
                                 Enhancing Few-shot Text-to-SQL Capabilities of Large Language Models: A Study on Prompt
                                 Design
@@ -121,34 +196,53 @@
                             <br>
                             <span class="conf">EMNLP 2023 (Findings)</span>
                         </p>
+                        <p class="paper my-2 pl-2" data-selected="false">
+                            <a class="tag" href="https://openreview.net/pdf?id=YZM9g0Mi9a" target="_blank">
+                                The Effect of Model Capacity on the Emergence of In-Context Learning in Transformers
+                            </a>
+                            <span class="tagsep"></span><br>
+                            Berkan Ottlik*, <span class="thisauthor">Narutatsu Ri</span>*, Daniel Hsu, Clayton Sanford
+                            <br>
+                            <span class="conf">ICLR 2024 (ME-FoMo Workshop)</span>
+                        </p>
+                        <p class="paper my-2 pl-2" data-selected="false">
+                            <a class="tag" href="https://arxiv.org/pdf/2306.08221" target="_blank">
+                                Contrastive Loss is All You Need to Recover Analogies as Parallel Lines
+                            </a>
+                            <span class="tagsep"></span><br>
+                            <span class="thisauthor">Narutatsu Ri</span>, Fei-Tzin Lee, Nakul Verma
+                            <br>
+                            <span class="conf">ACL 2023 (RepL4NLP Workshop)</span>
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div id="footer-placeholder"></div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
-        $(function () {
-            $("#navbar-placeholder").load("layouts/navbar.html");
-            $("#footer-placeholder").load("layouts/footer.html");
-        });
-    </script>
-    <script>
-        function togglePopup() {
-            const popup = document.getElementById('popup');
-            popup.style.display = (popup.style.display === 'block') ? 'none' : 'block';
+        function showPapers(view) {
+            const isFull = view === 'full';
+            document.querySelectorAll('#papers-list .paper').forEach(function (p) {
+                p.style.display = (isFull || p.dataset.selected === 'true') ? '' : 'none';
+            });
+            document.querySelectorAll('.papers-toggle-btn').forEach(function (btn) {
+                btn.classList.toggle('active', btn.dataset.view === view);
+            });
         }
 
-        window.addEventListener('click', function (event) {
-            const popup = document.getElementById('popup');
-            const button = document.querySelector('.info-button');
-            if (!button.contains(event.target) && !popup.contains(event.target)) {
-                popup.style.display = 'none';
-            }
+        function toggleCollab() {
+            const content = document.getElementById('collab-content');
+            const toggle = document.querySelector('.collab-toggle');
+            const shown = content.classList.toggle('show');
+            if (toggle) toggle.setAttribute('aria-expanded', shown);
+        }
+
+        $(function () {
+            $("#navbar-placeholder").load("layouts/navbar.html");
+            showPapers('selected');
         });
     </script>
 </body>
