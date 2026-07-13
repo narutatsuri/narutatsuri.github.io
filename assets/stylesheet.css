@@ -199,6 +199,17 @@ details[open] summary:before {
   font-weight: bold;
 }
 
+.award {
+  color: #c9971a;
+  font-weight: bold;
+}
+
+.award-icon {
+  height: 1.25em;
+  width: auto;
+  vertical-align: -0.3em;
+}
+
 .collab-content {
   display: none;
   margin-top: 10px;
