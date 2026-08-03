@@ -5,17 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#222222">
-    <meta name="description"
-        content="Narutatsu (Edward) Ri — PhD student at Princeton University (CS & PLI), advised by Sanjeev Arora. Research on large language models, reasoning, and AI safety.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://narutatsuri.github.io/">
     <meta property="og:title" content="Narutatsu Ri">
-    <meta property="og:description"
-        content="PhD student at Princeton University (CS & PLI) working on large language models, reasoning, and AI safety.">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Narutatsu Ri">
-    <meta name="twitter:description"
-        content="PhD student at Princeton University (CS & PLI) working on large language models, reasoning, and AI safety.">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="assets/stylesheet.css">
@@ -23,7 +17,27 @@
 </head>
 
 <body>
-    <div id="navbar-placeholder"></div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <div class="col-lg-8 mx-auto d-flex flex-wrap align-items-center justify-content-between">
+                <a class="navbar-brand" href="index.html">Narutatsu Ri</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
+                    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="index.html" aria-current="page">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="misc.html">Misc.</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
     <div class="container pt-5">
         <div class="row justify-content-center">
             <div class="col-lg-8">
@@ -45,9 +59,10 @@
                             Memorial Recruit Foundation</a>. Please find my CV <a href="data/curriculum_vitae.pdf" class="link" target="_blank">here</a>.
                     </p>
                     <p>
-                        <strong>Research Interests:</strong> I'm broadly interested in <strong>AI safety</strong>
-                        (e.g., developing a scientific understanding of failure modes in current models) and
-                        <strong>misalignment</strong> (e.g., how scaling capabilities enables undesirable behavior in frontier models).
+                        <strong>Research Interests:</strong> I'm broadly interested in AI safety
+                        (e.g., developing a scientific understanding of failure modes in current models),
+                        misalignment (e.g., how scaling capabilities enables undesirable behavior in frontier models),
+                        and self-improvement, along with the safety implications that come with it.
                     </p>
                     <p>
                         I previously finished my B.S./M.S. at Columbia University where I was part of the <a
@@ -75,20 +90,15 @@
                             aria-controls="collab-content">Click here</button> for information.
                     </p>
                     <div id="collab-content" class="collab-content">
-                        <p>Thank you very much for your interest in reaching out! I'm always more than happy to chat
-                            with people, and to work with potential collaborators and students.</p>
-                        <p><strong>For collaborators:</strong> Feel free to email me about any research topics or
-                            ideas you'd like to explore together. It may help to take a look at my selected publications
-                            to get a sense of the areas I can help with.</p>
-                        <p><strong>For Princeton undergraduate/master's students:</strong> If you're already at Princeton
-                            and interested in
-                            research opportunities, please email me with your CV, transcript, and a brief description of
-                            your research interests.</p>
-                        <p><strong>For non-Princeton students:</strong> My bandwidth may be limited, but I'm still more
-                            than happy to chat!
-                            That said, arranging access to campus compute and files may be difficult. If you're
-                            interested in remote collaboration and have access to the compute needed for your research
-                            interests, please reach out via email.</p>
+                        <p>Thanks for your interest! I'm always happy to chat and to work with new people.</p>
+                        <p><strong>For collaborators:</strong> Email me about any research topics or ideas you'd like
+                            to explore together. The papers below give a sense of the areas I can help with.</p>
+                        <p><strong>For Princeton undergraduate/master's students:</strong> If you're at Princeton and
+                            interested in research opportunities, email me your CV and a brief description of your
+                            research interests.</p>
+                        <p><strong>For non-Princeton students:</strong> Same. My bandwidth is limited, but I'm still
+                            happy to chat! Arranging campus compute access is also difficult, so remote collaboration
+                            works best if you already have the compute your project needs.</p>
                     </div>
                 </div>
                 <div>
@@ -242,10 +252,7 @@
             if (toggle) toggle.setAttribute('aria-expanded', shown);
         }
 
-        $(function () {
-            $("#navbar-placeholder").load("layouts/navbar.html");
-            showPapers('selected');
-        });
+        showPapers('selected');
     </script>
 </body>
 
