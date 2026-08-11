@@ -1,14 +1,10 @@
 :root {
-  /* Liberation Serif / Nimbus Roman are the metric-compatible Linux fallbacks. */
-  --site-font: "Times New Roman", Times, "Liberation Serif", "Nimbus Roman", serif;
+  --site-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --site-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
 body {
   font-family: var(--site-font);
-  /* Times sets visually smaller than a sans at the same px, so scale it up to
-     match the optical size of the default Bootstrap body text. */
-  font-size: 1.15rem;
 }
 
 code,
@@ -28,7 +24,7 @@ samp {
 }
 
 .subheaders {
-  font-size: 1.15rem;
+  font-size: 1rem;
   font-weight: bold;
   margin-top: 10pt;
 }
@@ -72,7 +68,7 @@ samp {
 
 .paper-titles {
   margin-top: 8pt;
-  font-size: 1.15rem;
+  font-size: 1rem;
   font-weight: bold;
 }
 
