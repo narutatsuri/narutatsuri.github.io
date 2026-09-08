@@ -243,3 +243,53 @@ details[open] summary:before {
 .collab-content p + p {
   margin-top: 10px;
 }
+
+/* --- Reading graph (Misc. page) --- */
+
+.reading-graph {
+  position: relative;
+  margin-top: 8px;
+  margin-bottom: 10pt;
+}
+
+.reading-graph canvas {
+  display: block;
+  width: 100%;
+  border-radius: 6px;
+  background: #17181c;
+  touch-action: none;
+}
+
+.reading-graph-tip {
+  position: absolute;
+  visibility: hidden;
+  max-width: 340px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+  padding: 7px 9px;
+  font-size: 9.5pt;
+  line-height: 1.35;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.reading-graph-tip .tip-head {
+  font-weight: bold;
+  margin-bottom: 3px;
+}
+
+.reading-graph-tip .tip-hint {
+  color: #888;
+  font-size: 8.5pt;
+  margin-top: 3px;
+}
+
+.reading-graph-tip .tip-body {
+  /* The longest summary is 6k characters; unclamped it swallows the page. */
+  display: -webkit-box;
+  -webkit-line-clamp: 16;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
