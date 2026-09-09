@@ -115,6 +115,11 @@
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script>
+            // Single-dollar inline math, for the reading-graph tooltips —
+            // the paper summaries are written with $…$.
+            window.MathJax = { tex: { inlineMath: [["\\(", "\\)"], ["$", "$"]] } };
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         <script src="data/reading-graph-data.js"></script>
         <script src="assets/reading-graph.js"></script>

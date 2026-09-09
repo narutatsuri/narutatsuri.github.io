@@ -30,6 +30,32 @@
         };
     }
 
+    function escapeHTML(s) {
+        return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    // Minimal markdown for a tooltip: bullet lines become a real list, blank
+    // lines break paragraphs, and TeX ($…$) passes through untouched for
+    // MathJax to typeset. Everything else is escaped — summaries are text.
+    function summaryHTML(text) {
+        var blocks = [], list = null, para = [];
+        function flushPara() {
+            if (para.length) { blocks.push("<p>" + para.join("<br>") + "</p>"); para = []; }
+        }
+        function flushList() {
+            if (list) { blocks.push("<ul>" + list.join("") + "</ul>"); list = null; }
+        }
+        escapeHTML(text).split("\n").forEach(function (raw) {
+            var line = raw.trim();
+            if (!line) { flushPara(); flushList(); return; }
+            var m = line.match(/^[-*]\s+(.*)$/);
+            if (m) { flushPara(); (list = list || []).push("<li>" + m[1] + "</li>"); }
+            else { flushList(); para.push(line); }
+        });
+        flushPara(); flushList();
+        return blocks.join("");
+    }
+
     // The app draws radius 7–26 and gives each body mass radius/8; the export
     // carries r on a 5–16 scale, so both are recovered from it.
     function appRadius(node) { return 7 + ((node.r - 5) / 11) * 19; }
@@ -286,11 +312,23 @@
         }
         window.requestAnimationFrame(frame);
 
+        var tipIndex = -1;
         function showTip(index, clientX, clientY) {
-            var text = tooltip(data.nodes[index]);
-            tipHead.textContent = text.head;
-            tipBody.textContent = text.body;
-            tipHint.textContent = text.hint;
+            if (index !== tipIndex) {
+                // Content only when the node changes — rebuilding (and
+                // re-typesetting) on every mousemove would flicker.
+                tipIndex = index;
+                var text = tooltip(data.nodes[index]);
+                tipHead.textContent = text.head;
+                tipBody.innerHTML = summaryHTML(text.body);
+                tipHint.textContent = text.hint;
+                if (window.MathJax && window.MathJax.typesetPromise) {
+                    try {
+                        if (window.MathJax.typesetClear) window.MathJax.typesetClear([tipBody]);
+                        window.MathJax.typesetPromise([tipBody]).catch(function () {});
+                    } catch (ignored) {}
+                }
+            }
             tip.style.visibility = "visible";
             var bounds = mount.getBoundingClientRect();
             var x = clientX - bounds.left + 14, y = clientY - bounds.top + 14;
@@ -424,7 +462,8 @@
 
     if (typeof module !== "undefined" && module.exports) {
         module.exports = { nodeStyle: nodeStyle, tooltip: tooltip,
-                           createSim: createSim, mass: mass, appRadius: appRadius };
+                           createSim: createSim, mass: mass, appRadius: appRadius,
+                           summaryHTML: summaryHTML };
     } else if (typeof window !== "undefined") {
         document.addEventListener("DOMContentLoaded", function () {
             var mount = document.getElementById("reading-graph");

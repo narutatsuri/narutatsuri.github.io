@@ -287,11 +287,28 @@ details[open] summary:before {
 }
 
 .reading-graph-tip .tip-body {
-  /* The longest summary is 6k characters; unclamped it swallows the page. */
-  display: -webkit-box;
-  -webkit-line-clamp: 16;
-  -webkit-box-orient: vertical;
+  /* The longest summary is 6k characters; uncapped it swallows the page.
+     A height cap, not line-clamp: the body holds real lists and paragraphs
+     now, and line-clamp only behaves over plain lines. */
+  max-height: 300px;
   overflow: hidden;
+}
+
+.reading-graph-tip .tip-body p {
+  margin: 0 0 4px 0;
+}
+
+.reading-graph-tip .tip-body p:last-child {
+  margin-bottom: 0;
+}
+
+.reading-graph-tip .tip-body ul {
+  margin: 0 0 4px 0;
+  padding-left: 16px;
+}
+
+.reading-graph-tip .tip-body li {
+  margin: 1px 0;
 }
 
 .reading-graph-hint {
