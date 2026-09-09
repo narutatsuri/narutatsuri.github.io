@@ -340,7 +340,24 @@
             focus = -1;
             tip.style.visibility = "hidden";
         });
+        var hint = document.createElement("div");
+        hint.className = "reading-graph-hint";
+        hint.textContent = (navigator.platform || "").indexOf("Mac") >= 0
+            ? "⌘ + scroll to zoom" : "Ctrl + scroll to zoom";
+        mount.appendChild(hint);
+        var hintTimer = null;
+        function flashHint() {
+            hint.classList.add("visible");
+            if (hintTimer) clearTimeout(hintTimer);
+            hintTimer = setTimeout(function () { hint.classList.remove("visible"); }, 1200);
+        }
+
         canvas.addEventListener("wheel", function (event) {
+            // Plain scrolling keeps scrolling the page — a graph that eats
+            // the wheel is the embedded-map mistake. Zoom asks for a
+            // modifier; a trackpad pinch arrives as ctrl+wheel, so pinching
+            // zooms with no modifier at all.
+            if (!event.ctrlKey && !event.metaKey) { flashHint(); return; }
             event.preventDefault();
             var factor = Math.exp(-event.deltaY * 0.0015);
             var next = Math.min(4, Math.max(0.25, scale * factor));
@@ -356,41 +373,48 @@
             sim.reheat(0.55);
         });
 
-        // Touch: one finger drags a paper or pans, two pinch-zoom.
+        // Touch: a finger on a paper drags the paper; a finger on empty space
+        // belongs to the page (swiping over the graph must keep scrolling —
+        // trapping it is the mobile version of eating the wheel). Two fingers
+        // pinch-zoom and pan the graph.
+        var lastMidX = 0, lastMidY = 0;
         canvas.addEventListener("touchstart", function (event) {
-            if (event.touches.length === 1) {
-                var t = event.touches[0], b = canvas.getBoundingClientRect();
-                var world = toWorld(t.clientX - b.left, t.clientY - b.top);
-                dragIndex = nodeAt(world[0], world[1]);
-                panning = dragIndex < 0;
-                lastX = t.clientX - b.left; lastY = t.clientY - b.top;
-                if (dragIndex >= 0) sim.drag(dragIndex, world[0], world[1]);
-            } else if (event.touches.length === 2) {
-                pinchDist = Math.hypot(
-                    event.touches[0].clientX - event.touches[1].clientX,
-                    event.touches[0].clientY - event.touches[1].clientY);
-            }
-        }, { passive: true });
-        canvas.addEventListener("touchmove", function (event) {
-            event.preventDefault();
             var b = canvas.getBoundingClientRect();
             if (event.touches.length === 1) {
                 var t = event.touches[0];
-                var x = t.clientX - b.left, y = t.clientY - b.top;
-                if (dragIndex >= 0) {
-                    var world = toWorld(x, y);
-                    sim.drag(dragIndex, world[0], world[1]);
-                } else if (panning) {
-                    panX += x - lastX; panY += y - lastY;
-                }
-                lastX = x; lastY = y;
+                var world = toWorld(t.clientX - b.left, t.clientY - b.top);
+                dragIndex = nodeAt(world[0], world[1]);
+                if (dragIndex >= 0) sim.drag(dragIndex, world[0], world[1]);
+            } else if (event.touches.length === 2) {
+                if (dragIndex >= 0) { sim.drag(-1, 0, 0); dragIndex = -1; }
+                pinchDist = Math.hypot(
+                    event.touches[0].clientX - event.touches[1].clientX,
+                    event.touches[0].clientY - event.touches[1].clientY);
+                lastMidX = (event.touches[0].clientX + event.touches[1].clientX) / 2;
+                lastMidY = (event.touches[0].clientY + event.touches[1].clientY) / 2;
+            }
+        }, { passive: true });
+        canvas.addEventListener("touchmove", function (event) {
+            var b = canvas.getBoundingClientRect();
+            if (event.touches.length === 1 && dragIndex >= 0) {
+                event.preventDefault();
+                var t = event.touches[0];
+                var world = toWorld(t.clientX - b.left, t.clientY - b.top);
+                sim.drag(dragIndex, world[0], world[1]);
             } else if (event.touches.length === 2 && pinchDist > 0) {
+                event.preventDefault();
                 var d = Math.hypot(
                     event.touches[0].clientX - event.touches[1].clientX,
                     event.touches[0].clientY - event.touches[1].clientY);
                 scale = Math.min(4, Math.max(0.25, scale * (d / pinchDist)));
                 pinchDist = d;
+                var midX = (event.touches[0].clientX + event.touches[1].clientX) / 2;
+                var midY = (event.touches[0].clientY + event.touches[1].clientY) / 2;
+                panX += midX - lastMidX;
+                panY += midY - lastMidY;
+                lastMidX = midX; lastMidY = midY;
             }
+            // One finger on empty space: no preventDefault — the page scrolls.
         }, { passive: false });
         window.addEventListener("touchend", function () {
             if (dragIndex >= 0) sim.drag(-1, 0, 0);

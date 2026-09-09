@@ -257,7 +257,7 @@ details[open] summary:before {
   width: 100%;
   border-radius: 6px;
   background: #17181c;
-  touch-action: none;
+  touch-action: pan-y;
 }
 
 .reading-graph-tip {
@@ -292,4 +292,24 @@ details[open] summary:before {
   -webkit-line-clamp: 16;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.reading-graph-hint {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.72);
+  color: #eee;
+  font-size: 9pt;
+  padding: 4px 12px;
+  border-radius: 12px;
+  opacity: 0;
+  transition: opacity 0.25s;
+  pointer-events: none;
+  z-index: 9;
+}
+
+.reading-graph-hint.visible {
+  opacity: 1;
 }
