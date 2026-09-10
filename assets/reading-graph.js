@@ -465,9 +465,26 @@
                            createSim: createSim, mass: mass, appRadius: appRadius,
                            summaryHTML: summaryHTML };
     } else if (typeof window !== "undefined") {
+        // The data lives in the notes repo itself, refreshed by the notes
+        // app on every push — this page always shows whatever was last
+        // pushed there, with nothing to re-commit here.
+        var SOURCE = "https://raw.githubusercontent.com/narutatsuri/"
+            + "paper-notes/main/reading-graph.json";
         document.addEventListener("DOMContentLoaded", function () {
             var mount = document.getElementById("reading-graph");
-            if (mount && window.READING_GRAPH) render(window.READING_GRAPH, mount);
+            if (!mount) return;
+            fetch(SOURCE)
+                .then(function (r) {
+                    if (!r.ok) throw new Error("HTTP " + r.status);
+                    return r.json();
+                })
+                .then(function (data) { render(data, mount); })
+                .catch(function () {
+                    var note = document.createElement("div");
+                    note.className = "reading-graph-note";
+                    note.textContent = "The reading graph could not be loaded right now.";
+                    mount.appendChild(note);
+                });
         });
     }
 })();
