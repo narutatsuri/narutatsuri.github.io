@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="theme-color" content="#222222">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <link rel="stylesheet" href="assets/stylesheet.css">
         <title>Narutatsu Ri</title>
     </head>
@@ -22,6 +21,9 @@
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
                                 <a class="nav-link" href="index.html">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="notes.html">Notes</a>
                             </li>
                             <li class="nav-item active">
                                 <a class="nav-link" href="misc.html" aria-current="page">Misc.</a>
@@ -79,7 +81,7 @@
                             href="https://arxiv.org/pdf/1209.1688" class="link">Rank Centrality: Ranking from Pair-wise Comparisons
                             </a>
                         </li>
-                        <li>[05/2023] <a href="data/k_means_survey.pdf">Short report</a> on \(k\)-means++</li>
+                        <li>[05/2023] <a href="data/k_means_survey.pdf">Short report</a> on <i>k</i>-means++</li>
                         <li>[04/2023] <a href="data/neural_tangent_kernels_notes.pdf">Doodles</a> on Neural
                             Tangent
                             Kernels
@@ -90,7 +92,7 @@
                         </li>
                         <li>[12/2022] <a href="data/Normalized_Embeddings_and_Linguistic_Regularity.pdf"
                             class="link">Writeup</a>
-                            on embeddability of word analogies on the \(n\)-sphere
+                            on embeddability of word analogies on the <i>n</i>-sphere
                         </li>
                         <li>[07/2022] <a href="data/2022-7-5-ircn_paper_1.pdf" class="link">Presentation</a> on <a
                             href="https://www.biorxiv.org/content/10.1101/2022.06.08.495348v1" class="link">
@@ -115,21 +117,14 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-lg-8">
-                    <div class="subheaders">Notes for Some Papers</div>
-                    <div class="reading-graph" id="reading-graph"></div>
-                </div>
             </div>
         </div>
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script>
-            // Single-dollar inline math, for the reading-graph tooltips —
-            // the paper summaries are written with $…$.
-            window.MathJax = { tex: { inlineMath: [["\\(", "\\)"], ["$", "$"]] } };
+            // The only JS Bootstrap was loaded for: toggle the mobile nav.
+            document.querySelector('.navbar-toggler').addEventListener('click', function () {
+                var open = document.getElementById('navbarContent').classList.toggle('show');
+                this.setAttribute('aria-expanded', open);
+            });
         </script>
-        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-        <script src="assets/reading-graph.js"></script>
     </body>
 </html>

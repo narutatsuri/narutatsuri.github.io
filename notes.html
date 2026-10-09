@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="theme-color" content="#222222">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/stylesheet.css">
+        <title>Narutatsu Ri</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <div class="col-lg-8 mx-auto d-flex flex-wrap align-items-center justify-content-between">
+                    <a class="navbar-brand" href="index.html">Narutatsu Ri</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
+                        aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarContent">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.html">About</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="notes.html" aria-current="page">Notes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="misc.html">Misc.</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="container pt-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <p class="aligned-text">
+                        Papers I've been reading, laid out by how they relate to each other. Hover a node for my
+                        notes on it. Drag to pan, scroll to zoom, drag a paper to pull its neighbours along, and
+                        double-click to reset.
+                    </p>
+                    <div class="reading-graph" id="reading-graph"></div>
+                </div>
+            </div>
+        </div>
+        <script>
+            // The only JS Bootstrap was loaded for: toggle the mobile nav.
+            document.querySelector('.navbar-toggler').addEventListener('click', function () {
+                var open = document.getElementById('navbarContent').classList.toggle('show');
+                this.setAttribute('aria-expanded', open);
+            });
+        </script>
+        <script>
+            // Single-dollar inline math, for the reading-graph tooltips —
+            // the paper summaries are written with $…$.
+            window.MathJax = { tex: { inlineMath: [["\\(", "\\)"], ["$", "$"]] } };
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="assets/reading-graph.js"></script>
+    </body>
+</html>

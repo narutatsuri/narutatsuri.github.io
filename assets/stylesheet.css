@@ -66,12 +66,6 @@ samp {
   color: #ffffff;
 }
 
-.paper-titles {
-  margin-top: 8pt;
-  font-size: 1rem;
-  font-weight: bold;
-}
-
 .navbar-brand {
   margin-right: 30pt;
 }
@@ -165,34 +159,6 @@ details[open] summary:before {
 .content {
   margin-left: 5pt;
   margin-top: 10pt;
-}
-
-.popup-container {
-  display: inline-block;
-  position: relative;
-}
-
-.info-popup {
-  display: none;
-  position: absolute;
-  top: 100%;      /* Position below the button */
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #f9f9f9;
-  border: 1px solid #ccc;
-  padding: 8px;
-  border-radius: 4px;
-  z-index: 100;
-  width: 400px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-}
-
-.info-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  padding: 0;
 }
 
 .collab-toggle {
